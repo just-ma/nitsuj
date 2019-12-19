@@ -1,0 +1,31 @@
+.charContainer {
+  position: relative;
+
+  .char {
+    position: absolute;
+    animation-name: circle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+  }
+}
+
+@keyframes circle {
+  0% {
+    left: 0px;
+    top: -5px;
+  }
+  25% {
+    left: 2px;
+  }
+  50% {
+    top: 5px;
+  }
+  75% {
+    left: -2px;
+  }
+  100% {
+    left: 0px;
+    top: -5px;
+  }
+}
