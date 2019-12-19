@@ -1,10 +1,10 @@
 import React from "react";
-import WiggleText from "../../components/wiggleText/WiggleText";
+import Grid from "../../components/grid/Grid";
 
 export default function LandingPage() {
   return (
     <div>
-      <WiggleText>BLUE CHINA</WiggleText>
+      <Grid/>
     </div>
   );
 }
