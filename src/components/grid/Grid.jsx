@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import GridItem from "../gridItem/GridItem";
+import "./Grid.scss";
 
 export default function Grid() {
   return (
-    <div >
+    <div className="grid">
       <GridItem />
       <GridItem />
       <GridItem />
