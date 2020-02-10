@@ -2,6 +2,10 @@ import React from "react";
 import WiggleText from "../wiggleText/WiggleText";
 import "./GridItem.scss";
 
+const SizeButton = () => {
+  return <div className="sizeButton">S</div>;
+};
+
 export default function GridItem() {
   return (
     <div className="listItem">
@@ -10,7 +14,7 @@ export default function GridItem() {
         <span className="price">$25</span>
       </div>
       <div className="listItem__right">
-
+        <SizeButton/>
       </div>
     </div>
   );
