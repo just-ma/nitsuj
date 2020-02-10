@@ -5,9 +5,10 @@
   margin: 20px;
 
   &__left {
+    width: 200px;
     position: relative;
-    flex: 15;
-    margin-top: 100px;
+    flex: 20;
+    margin-top: 50px;
 
     .price {
       position: absolute;
@@ -16,9 +17,15 @@
   }
 
   &__right {
-    flex: 14;
-    margin: 40px;
+    flex: 16;
+    margin-left: 50px;
     background-color: cadetblue;
+  }
+
+  &__sizes {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
   }
 }
 
@@ -28,4 +35,11 @@
   border: solid black 2px;
   line-height: 2.4;
   text-align: center;
+  transition: ease 0.3s;
+
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
 }

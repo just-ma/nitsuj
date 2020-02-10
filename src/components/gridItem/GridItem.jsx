@@ -14,7 +14,12 @@ export default function GridItem() {
         <span className="price">$25</span>
       </div>
       <div className="listItem__right">
-        <SizeButton/>
+        <div className="listItem__sizes">
+          <SizeButton />
+          <SizeButton />
+          <SizeButton />
+          <SizeButton />
+        </div>
       </div>
     </div>
   );
