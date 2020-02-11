@@ -2,8 +2,8 @@ import React from "react";
 import WiggleText from "../wiggleText/WiggleText";
 import "./GridItem.scss";
 
-const SizeButton = () => {
-  return <div className="sizeButton">S</div>;
+const SizeButton = ({ title }) => {
+  return <div className="sizeButton">{title}</div>;
 };
 
 export default function GridItem() {
@@ -15,10 +15,10 @@ export default function GridItem() {
       </div>
       <div className="gridItem__right">
         <div className="gridItem__sizes">
-          <SizeButton />
-          <SizeButton />
-          <SizeButton />
-          <SizeButton />
+          <SizeButton title="S" />
+          <SizeButton title="M" />
+          <SizeButton title="L" />
+          <SizeButton title="XL" />
         </div>
       </div>
     </div>
