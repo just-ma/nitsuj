@@ -8,13 +8,13 @@ const SizeButton = () => {
 
 export default function GridItem() {
   return (
-    <div className="listItem">
-      <div className="listItem__left">
+    <div className="gridItem">
+      <div className="gridItem__left">
         <WiggleText>BLUE CHINA</WiggleText>
         <span className="price">$25</span>
       </div>
-      <div className="listItem__right">
-        <div className="listItem__sizes">
+      <div className="gridItem__right">
+        <div className="gridItem__sizes">
           <SizeButton />
           <SizeButton />
           <SizeButton />
