@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Box.scss";
 import nsjLogo from "../../public/nsj.png";
-import test1 from "../../public/test1.jpg";
+import nitsuj from "../../public/nitsuj.jpg";
+import bluechina from "../../public/bluechina.jpg";
+import channel2 from "../../public/channel2.jpg";
+import cocotaxi from "../../public/cocotaxi.jpg";
 
 const data = [
   {
@@ -18,7 +21,7 @@ const data = [
     heightOffset: 200,
     top: 0,
     topOffset: -300,
-    src: test1
+    src: nitsuj
   },
   {
     className: "box__train__item",
@@ -26,7 +29,7 @@ const data = [
     heightOffset: null,
     top: 2,
     topOffset: -500,
-    src: nsjLogo
+    src: bluechina
   },
   {
     className: "box__train__item",
@@ -34,7 +37,7 @@ const data = [
     heightOffset: null,
     top: 2,
     topOffset: -950,
-    src: test1
+    src: channel2
   },
   {
     className: "box__train__item",
@@ -42,7 +45,7 @@ const data = [
     heightOffset: null,
     top: 2,
     topOffset: -1400,
-    src: nsjLogo
+    src: cocotaxi
   }
 ];
 
