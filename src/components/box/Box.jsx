@@ -46,31 +46,52 @@ const data = [
   }
 ];
 
+const ShoppingCart = ({ atTop, num = 0 }) => {
+  return (
+    <div className="shoppingCart">
+      {atTop ? (
+        <p>(scroll)</p>
+      ) : (
+        <a className="shoppingCart__text" href="/">
+          cart({num})
+        </a>
+      )}
+    </div>
+  );
+};
+
 export default function Box() {
-  const [scroll, setScroll] = useState(0);
-  
+  const [scroll, setScroll] = useState(window.scrollY);
+  const [atTop, setAtTop] = useState(window.scrollY === 0);
+
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
   }, []);
 
   const toggleScroll = () => {
     setScroll(window.scrollY);
+    setAtTop(window.scrollY === 0);
   };
 
   const itemVar = [null, scroll, window.innerHeight / 2];
 
   return (
-    <div className="box">
-      <div className="box__train" style={{ top: -scroll }}>
-        {data.map(e => {
-          let h = itemVar[e.height] + e.heightOffset;
-          let t = scroll - itemVar[e.top] + e.topOffset;
-          return (
-            <div className={e.className} style={{ height: h }}>
-              <img className="box__content" style={{ top: t }} src={e.src} />
-            </div>
-          );
-        })}
+    <div>
+      <div className="box">
+        <div className="box__train" style={{ top: -scroll }}>
+          {data.map(e => {
+            let h = itemVar[e.height] + e.heightOffset;
+            let t = scroll - itemVar[e.top] + e.topOffset;
+            return (
+              <div className={e.className} style={{ height: h }}>
+                <img className="box__content" style={{ top: t }} src={e.src} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="boxFooter">
+        <ShoppingCart atTop={atTop} />
       </div>
     </div>
   );
