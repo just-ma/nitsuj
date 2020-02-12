@@ -62,13 +62,13 @@ const SizeButton = ({ title, onSelectSize, size }) => {
   );
 };
 
-export default function GridItem() {
+export default function GridItem({ title, price }) {
   return (
     <div className="gridItem">
       <div className="gridItem__left">
-        <WiggleText>BLUE CHINA</WiggleText>
+        <WiggleText>{title}</WiggleText>
         <span className="price">
-          <WiggleText>$25</WiggleText>
+          <WiggleText>{"$" + price}</WiggleText>
         </span>
       </div>
       <div className="gridItem__right">

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import "./Box.scss";
 import nsjLogo from "../../public/nsj.png";
 import test1 from "../../public/test1.jpg";
