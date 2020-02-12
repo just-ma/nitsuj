@@ -23,7 +23,54 @@
   &__sizes {
     display: flex;
     justify-content: space-between;
-    width: 250px;
+    width: 200px;
+  }
+
+  &__description {
+    position: relative;
+    margin-top: 30px;
+  }
+
+  &__add {
+    position: absolute;
+    top: 0px;
+    height: 0px;
+    transition: ease 0.2s;
+    overflow: hidden;
+    width: 200px;
+
+    &.-selected {
+      height: 50px;
+    }
+
+    &__button {
+      position: absolute;
+      width: 200px;
+      border: solid black 2px;
+      font-size: 15px;
+      font-family: "Inconsolata", monospace;
+      outline: none;
+      padding: 10px;
+      transition: ease 0.2s;
+      height: 0px;
+      background: white;
+
+      &.-selected {
+        height: 40px;
+      }
+
+      &:hover {
+        width: 200px;
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+
+  &__confirmation {
+    position: absolute;
+    color: black;
+    margin: 12px 75px;
   }
 }
 
@@ -33,11 +80,20 @@
   border: solid black 2px;
   line-height: 2.4;
   text-align: center;
-  transition: ease 0.3s;
+  transition: ease 0.2s;
+  font-size: 14px;
+  font-family: "Inconsolata", monospace;
+  outline: none;
+
+  &.-selected {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+  }
 
   &:hover {
     background-color: black;
     color: white;
-    cursor: pointer;
+    width: 60px;
   }
 }

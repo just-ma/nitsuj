@@ -15,7 +15,7 @@ const data = [
   {
     className: "box__train__head",
     height: 2,
-    heightOffset: 100,
+    heightOffset: 200,
     top: 0,
     topOffset: -300,
     src: test1
@@ -25,7 +25,7 @@ const data = [
     height: null,
     heightOffset: null,
     top: 2,
-    topOffset: -400,
+    topOffset: -500,
     src: nsjLogo
   },
   {
@@ -33,7 +33,7 @@ const data = [
     height: null,
     heightOffset: null,
     top: 2,
-    topOffset: -850,
+    topOffset: -950,
     src: test1
   },
   {
@@ -41,7 +41,7 @@ const data = [
     height: null,
     heightOffset: null,
     top: 2,
-    topOffset: -1300,
+    topOffset: -1400,
     src: nsjLogo
   }
 ];
@@ -65,7 +65,6 @@ export default function Box() {
         {data.map(e => {
           let h = itemVar[e.height] + e.heightOffset;
           let t = scroll - itemVar[e.top] + e.topOffset;
-          console.log(e, h, t);
           return (
             <div className={e.className} style={{ height: h }}>
               <img className="box__content" style={{ top: t }} src={e.src} />
