@@ -67,7 +67,9 @@ export default function GridItem() {
     <div className="gridItem">
       <div className="gridItem__left">
         <WiggleText>BLUE CHINA</WiggleText>
-        <span className="price">$25</span>
+        <span className="price">
+          <WiggleText>$25</WiggleText>
+        </span>
       </div>
       <div className="gridItem__right">
         <SizeBox />

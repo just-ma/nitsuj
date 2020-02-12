@@ -1,0 +1,31 @@
+.menu {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(0, calc(-50% + 180px));
+  width: 300px;
+  display: flex;
+  justify-content: center;
+
+  &__shoppingCart {
+    &__text {
+      color: black;
+
+      &.-blinking {
+        animation: blink infinite 1.5s linear;
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

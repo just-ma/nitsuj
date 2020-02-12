@@ -47,25 +47,8 @@ const data = [
   }
 ];
 
-const ShoppingCart = ({ atTop }) => {
-  const count = useSelector(state => state.counter.value);
-  
-  return (
-    <div className="shoppingCart">
-      {atTop ? (
-        <p>(scroll)</p>
-      ) : (
-        <a className="shoppingCart__text" href="/">
-          cart({count})
-        </a>
-      )}
-    </div>
-  );
-};
-
 export default function Box() {
   const [scroll, setScroll] = useState(window.scrollY);
-  const [atTop, setAtTop] = useState(window.scrollY === 0);
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
@@ -73,7 +56,6 @@ export default function Box() {
 
   const toggleScroll = () => {
     setScroll(window.scrollY);
-    setAtTop(window.scrollY === 0);
   };
 
   const itemVar = [null, scroll, window.innerHeight / 2];
@@ -92,9 +74,6 @@ export default function Box() {
             );
           })}
         </div>
-      </div>
-      <div className="boxFooter">
-        <ShoppingCart atTop={atTop} />
       </div>
     </div>
   );

@@ -38,20 +38,3 @@
     height: 300px;
   }
 }
-
-.boxFooter {
-  position: fixed;
-  top: 50%;
-  right: 50%;
-  transform: translate(0, calc(-50% + 180px));
-  width: 300px;
-  display: flex;
-  justify-content: center;
-}
-
-.shoppingCart {
-  &__text {
-    text-decoration: none;
-    color: black;
-  }
-}

@@ -1,7 +1,7 @@
 import { createStore, combineReducers } from "redux";
 
 const counterState = {
-  value: 12
+  value: 0
 }
 
 const counterReducer = (state = counterState, action) => {
