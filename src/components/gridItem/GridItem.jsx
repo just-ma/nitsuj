@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
 import "./GridItem.scss";
 
@@ -6,6 +7,7 @@ const SizeBox = () => {
   const [size, setSize] = useState(null);
   const [addClasses, setAddClasses] = useState(null);
   const [added, setAdded] = useState(false);
+  const dispatch = useDispatch();
 
   const buttons = [
     { title: "S" },
@@ -24,6 +26,7 @@ const SizeBox = () => {
     setSize(null);
     setAddClasses(null);
     setAdded(true);
+    dispatch({ type: "INCREMENT" });
   };
 
   return (

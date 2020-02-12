@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import "./Box.scss";
 import nsjLogo from "../../public/nsj.png";
 import test1 from "../../public/test1.jpg";
@@ -46,14 +47,16 @@ const data = [
   }
 ];
 
-const ShoppingCart = ({ atTop, num = 0 }) => {
+const ShoppingCart = ({ atTop }) => {
+  const count = useSelector(state => state.counter.value);
+  
   return (
     <div className="shoppingCart">
       {atTop ? (
         <p>(scroll)</p>
       ) : (
         <a className="shoppingCart__text" href="/">
-          cart({num})
+          cart({count})
         </a>
       )}
     </div>
