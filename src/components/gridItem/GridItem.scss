@@ -1,7 +1,7 @@
 .gridItem {
   display: flex;
   width: 700px;
-  height: 450px;
+  height: 500px;
 
   &__left {
     width: 200px;
@@ -53,7 +53,7 @@
       padding: 10px;
       transition: ease 0.2s;
       height: 0px;
-      background: white;
+      background-color: transparent;
 
       &.-selected {
         height: 40px;
@@ -84,6 +84,7 @@
   font-size: 14px;
   font-family: "Inconsolata", monospace;
   outline: none;
+  background-color: transparent;
 
   &.-selected {
     font-weight: bold;

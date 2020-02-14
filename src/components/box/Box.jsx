@@ -18,7 +18,7 @@ const data = [
   {
     className: "box__train__head",
     height: 2,
-    heightOffset: 200,
+    heightOffset: null,
     top: 0,
     topOffset: -300,
     src: nitsuj
@@ -28,7 +28,7 @@ const data = [
     height: null,
     heightOffset: null,
     top: 2,
-    topOffset: -500,
+    topOffset: -300,
     src: bluechina
   },
   {
@@ -36,7 +36,7 @@ const data = [
     height: null,
     heightOffset: null,
     top: 2,
-    topOffset: -950,
+    topOffset: -650,
     src: channel2
   },
   {
@@ -44,7 +44,7 @@ const data = [
     height: null,
     heightOffset: null,
     top: 2,
-    topOffset: -1400,
+    topOffset: -1000,
     src: cocotaxi
   }
 ];
@@ -65,10 +65,10 @@ export default function Box() {
   return (
     <div>
       <div className="box">
-        <div className="box__train" style={{ top: -scroll }}>
+        <div className="box__train" style={{ top: -scroll*0.7 }}>
           {data.map(e => {
             let h = itemVar[e.height] + e.heightOffset;
-            let t = scroll - itemVar[e.top] + e.topOffset;
+            let t = scroll*0.7 - itemVar[e.top] + e.topOffset;
             return (
               <div className={e.className} style={{ height: h }}>
                 <img className="box__content" style={{ top: t }} src={e.src} />
