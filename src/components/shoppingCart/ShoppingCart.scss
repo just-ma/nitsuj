@@ -1,0 +1,42 @@
+.shoppingCart {
+  position: relative;
+  margin-bottom: 650px;
+
+  &__topBorder {
+    position: absolute;
+    top: -150px;
+  }
+
+  &__right {
+    position: absolute;
+    width: 400px;
+    left: 400px;
+  }
+
+  &__item {
+    margin: 10px 10px 50px 10px;
+  }
+
+  &__break {
+    height: 100px;
+  }
+
+  &__checkout {
+    position: absolute;
+    width: 200px;
+    border: solid black 2px;
+    font-size: 15px;
+    font-family: "Inconsolata", monospace;
+    outline: none;
+    padding: 10px;
+    transition: ease 0.2s;
+    background-color: transparent;
+    margin-left: 10px;
+
+    &:hover {
+      width: 200px;
+      background-color: black;
+      color: white;
+    }
+  }
+}

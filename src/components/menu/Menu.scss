@@ -8,12 +8,18 @@
   justify-content: center;
 
   &__shoppingCart {
-    &__text {
+    &__cart {
       color: black;
 
       &.-blinking {
         animation: blink infinite 1.5s linear;
       }
+    }
+
+    &__scroll {
+      position: absolute;
+      top: 0px;
+      left: 100px;
     }
   }
 }

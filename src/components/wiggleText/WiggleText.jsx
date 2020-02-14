@@ -10,7 +10,7 @@ export default function WiggleText({ children }) {
   };
 
   const getDelay = i => {
-    return `${i * 0.2 - 10 + offset}s`;
+    return `${i * 0.2 - 20 + offset}s`;
   };
 
   return (

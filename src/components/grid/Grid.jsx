@@ -1,5 +1,7 @@
 import React from "react";
 import GridItem from "../gridItem/GridItem";
+import ShoppingCart from "../shoppingCart/ShoppingCart";
+import WiggleText from "../wiggleText/WiggleText";
 import "./Grid.scss";
 
 const items = [
@@ -27,6 +29,7 @@ export default function Grid() {
       {items.map(i => (
         <GridItem title={i.title} price={i.price} />
       ))}
+      <ShoppingCart />
     </div>
   );
 }
