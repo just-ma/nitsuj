@@ -7,16 +7,19 @@ const items = [
   { title: "COCOTAXI", size: "S", price: "50" }
 ];
 
-const Item = ({ title, price }) => {
+const Item = ({ title, price, bold }) => {
+  let itemClasses = ["shoppingCart__item"];
+  bold && itemClasses.push("-bold");
+
   return (
-    <div className="shoppingCart__item">
+    <div className={itemClasses.join(" ")}>
       {title + " "}
       <span>
         {Array(35 - title.length - price.length)
           .fill(".")
           .join("")}
       </span>
-      {(price === "TBD" ? ". " : " $") + price}
+      {" $" + price}
     </div>
   );
 };
@@ -36,8 +39,7 @@ export default function ShoppingCart() {
           <Item title={`${i.title} (${i.size})`} price={i.price} />
         ))}
         <div className="shoppingCart__break" />
-        <Item title={"SHIPPING"} price={"TBD"} />
-        <Item title={"TOTAL"} price={totalPrice.toString()} />
+        <Item bold title={"SUBTOTAL"} price={totalPrice.toString()} />
         <button className={"shoppingCart__checkout"}>Checkout</button>
       </div>
     </div>

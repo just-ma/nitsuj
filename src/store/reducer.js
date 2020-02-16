@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from "redux";
 
-const counterState = {
+const cartState = {
   value: 0
 }
 
-const counterReducer = (state = counterState, action) => {
+const cartReducer = (state = cartState, action) => {
   switch (action.type) {
     case "INCREMENT":
       return { value: state.value + 1 };
@@ -15,7 +15,7 @@ const counterReducer = (state = counterState, action) => {
   }
 };
 
-const reducers = combineReducers({ counter: counterReducer });
+const reducers = combineReducers({ cart: cartReducer });
 
 const store = createStore(reducers);
 

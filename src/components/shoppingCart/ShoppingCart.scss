@@ -1,6 +1,6 @@
 .shoppingCart {
   position: relative;
-  margin-bottom: 650px;
+  margin-bottom: 600px;
 
   &__topBorder {
     position: absolute;
@@ -15,10 +15,14 @@
 
   &__item {
     margin: 10px 10px 50px 10px;
+
+    &.-bold {
+      font-weight: bold;
+    }
   }
 
   &__break {
-    height: 100px;
+    height: 70px;
   }
 
   &__checkout {

@@ -10,6 +10,7 @@
   &__shoppingCart {
     &__cart {
       color: black;
+      font-size: 14px;
 
       &.-blinking {
         animation: blink infinite 1.5s linear;
