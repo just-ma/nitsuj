@@ -25,8 +25,8 @@ const items = [
 export default function Grid() {
   return (
     <div className="grid">
-      {items.map(i => (
-        <GridItem title={i.title} price={i.price} />
+      {items.map((i, index) => (
+        <GridItem key={index} title={i.title} price={i.price} />
       ))}
       <ShoppingCart />
     </div>

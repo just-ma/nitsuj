@@ -65,13 +65,22 @@ export default function Box() {
   return (
     <div>
       <div className="box">
-        <div className="box__train" style={{ top: -scroll*0.7 }}>
-          {data.map(e => {
+        <div className="box__train" style={{ top: -scroll * 0.7 }}>
+          {data.map((e, i) => {
             let h = itemVar[e.height] + e.heightOffset;
-            let t = scroll*0.7 - itemVar[e.top] + e.topOffset;
+            let t = scroll * 0.7 - itemVar[e.top] + e.topOffset;
             return (
-              <div className={e.className} style={{ height: h }}>
-                <img className="box__content" style={{ top: t }} src={e.src} />
+              <div
+                key={i}
+                className={e.className}
+                style={{ height: h || null }}
+              >
+                <img
+                  className="box__content"
+                  style={{ top: t }}
+                  src={e.src}
+                  alt={"apparel"}
+                />
               </div>
             );
           })}

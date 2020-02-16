@@ -16,7 +16,7 @@ export default function WiggleText({ children }) {
   return (
     <div>
       {arr.map((c, i) => (
-        <div className="charContainer" style={{ left: getLeft(i) }}>
+        <div key={i} className="charContainer" style={{ left: getLeft(i) }}>
           <div className="char" style={{ animationDelay: getDelay(i) }}>
             {c}
           </div>

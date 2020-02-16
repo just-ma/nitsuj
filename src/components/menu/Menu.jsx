@@ -6,7 +6,7 @@ import WiggleText from "../wiggleText/WiggleText";
 export default function Menu() {
   const [atTop, setAtTop] = useState(window.scrollY === 0);
   const [cartClasses, setCartClasses] = useState("");
-  const count = useSelector(state => state.cart.value);
+  const count = useSelector(state => state.cart.items.length);
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);

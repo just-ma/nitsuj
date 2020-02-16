@@ -1,11 +1,7 @@
 import React from "react";
-import "./ShoppingCart.scss";
+import { useSelector } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
-
-const items = [
-  { title: "BLUE CHINA", size: "S", price: "25" },
-  { title: "COCOTAXI", size: "S", price: "50" }
-];
+import "./ShoppingCart.scss";
 
 const Item = ({ title, price, bold }) => {
   let itemClasses = ["shoppingCart__item"];
@@ -25,6 +21,8 @@ const Item = ({ title, price, bold }) => {
 };
 
 export default function ShoppingCart() {
+  const items = useSelector(state => state.cart.items);
+
   const totalPrice = items.reduce((t, i) => t + parseInt(i.price), 0);
 
   return (
@@ -35,8 +33,8 @@ export default function ShoppingCart() {
         </WiggleText>
       </div>
       <div className="shoppingCart__right">
-        {items.map(i => (
-          <Item title={`${i.title} (${i.size})`} price={i.price} />
+        {items.map((i, index) => (
+          <Item key={index} title={`${i.title} (${i.size})`} price={i.price} />
         ))}
         <div className="shoppingCart__break" />
         <Item bold title={"SUBTOTAL"} price={totalPrice.toString()} />

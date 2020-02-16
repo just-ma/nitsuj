@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
 import "./GridItem.scss";
 
-const SizeBox = () => {
+const SizeBox = ({ title, price }) => {
   const [size, setSize] = useState(null);
   const [addClasses, setAddClasses] = useState(null);
   const [added, setAdded] = useState(false);
@@ -26,14 +26,14 @@ const SizeBox = () => {
     setSize(null);
     setAddClasses(null);
     setAdded(true);
-    dispatch({ type: "INCREMENT" });
+    dispatch({ type: "INCREMENT", title: title, size: size, price: price });
   };
 
   return (
     <div>
       <div className="gridItem__sizes">
-        {buttons.map(b => (
-          <SizeButton title={b.title} onSelectSize={onSelectSize} size={size} />
+        {buttons.map((b, i) => (
+          <SizeButton key={i} title={b.title} onSelectSize={onSelectSize} size={size} />
         ))}
       </div>
       <div className="gridItem__description">
@@ -72,7 +72,7 @@ export default function GridItem({ title, price }) {
         </span>
       </div>
       <div className="gridItem__right">
-        <SizeBox />
+        <SizeBox title={title} price={price} />
       </div>
     </div>
   );

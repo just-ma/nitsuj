@@ -1,15 +1,24 @@
 import { createStore, combineReducers } from "redux";
 
 const cartState = {
-  value: 0
-}
+  items: []
+};
 
 const cartReducer = (state = cartState, action) => {
   switch (action.type) {
     case "INCREMENT":
-      return { value: state.value + 1 };
+      return {
+        items: [
+          ...state.items,
+          {
+            title: action.title,
+            size: action.size,
+            price: action.price
+          }
+        ]
+      };
     case "DECREMENT":
-      return { value: state.value - 1 };
+      return { value: state.items - 1 };
     default:
       return state;
   }
