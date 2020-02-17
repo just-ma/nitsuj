@@ -32,7 +32,7 @@ export default function Menu() {
             <WiggleText>(scroll)</WiggleText>
           </div>
         ) : (
-          <a className={"menu__shoppingCart__cart " + cartClasses} href="/">
+          <a className={"menu__shoppingCart__cart " + cartClasses} href="#shoppingCart">
             cart({count})
           </a>
         )}

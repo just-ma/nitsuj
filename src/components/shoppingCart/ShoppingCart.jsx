@@ -1,9 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
 import "./ShoppingCart.scss";
 
-const Item = ({ title, price, bold }) => {
+const RemoveButton = ({ id }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <button
+      className="shoppingCart__removeButton"
+      onClick={() => dispatch({ type: "DECREMENT", id: id })}
+    >
+      X
+    </button>
+  );
+};
+
+const Item = ({ id, title, price, bold, button }) => {
   let itemClasses = ["shoppingCart__item"];
   bold && itemClasses.push("-bold");
 
@@ -16,6 +29,7 @@ const Item = ({ title, price, bold }) => {
           .join("")}
       </span>
       {" $" + price}
+      {button && <RemoveButton id={id} />}
     </div>
   );
 };
@@ -26,15 +40,21 @@ export default function ShoppingCart() {
   const totalPrice = items.reduce((t, i) => t + parseInt(i.price), 0);
 
   return (
-    <div className="shoppingCart">
-      <div className="shoppingCart__topBorder">
+    <div className="shoppingCart" >
+      <div className="shoppingCart__topBorder" id="shoppingCart">
         <WiggleText>
           ====================================================
         </WiggleText>
       </div>
       <div className="shoppingCart__right">
-        {items.map((i, index) => (
-          <Item key={index} title={`${i.title} (${i.size})`} price={i.price} />
+        {items.map(i => (
+          <Item
+            key={i.id}
+            id={i.id}
+            title={`${i.title} (${i.size})`}
+            price={i.price}
+            button
+          />
         ))}
         <div className="shoppingCart__break" />
         <Item bold title={"SUBTOTAL"} price={totalPrice.toString()} />
