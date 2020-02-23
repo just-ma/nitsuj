@@ -1,56 +1,45 @@
 import React, { useState, useEffect } from "react";
-import "./Box.scss";
+import { items } from "../../mockData";
 import nsjLogo from "../../public/nsj.png";
-import nitsuj from "../../public/nitsuj.jpg";
-import bluechina from "../../public/bluechina.jpg";
-import channel2 from "../../public/channel2.jpg";
-import cocotaxi from "../../public/cocotaxi.jpg";
+import "./Box.scss";
 
-const data = [
-  {
-    className: "box__train__main",
-    height: null,
-    heightOffset: null,
-    top: 0,
-    topOffset: null,
-    src: nsjLogo
-  },
-  {
-    className: "box__train__head",
-    height: 2,
-    heightOffset: null,
-    top: 0,
-    topOffset: -300,
-    src: nitsuj
-  },
-  {
-    className: "box__train__item",
-    height: null,
-    heightOffset: null,
-    top: 2,
-    topOffset: -300,
-    src: bluechina
-  },
-  {
-    className: "box__train__item",
-    height: null,
-    heightOffset: null,
-    top: 2,
-    topOffset: -650,
-    src: channel2
-  },
-  {
-    className: "box__train__item",
-    height: null,
-    heightOffset: null,
-    top: 2,
-    topOffset: -1000,
-    src: cocotaxi
+const createListItem = (
+  className,
+  height,
+  heightOffset,
+  top,
+  topOffset,
+  src
+) => {
+  return {
+    className: className,
+    height: height,
+    heightOffset: heightOffset,
+    top: top,
+    topOffset: topOffset,
+    src: src
+  };
+};
+
+const createList = items => {
+  let data = [createListItem("box__train__main", null, null, 0, null, nsjLogo)];
+  if (items.length > 0) {
+    data.push(
+      createListItem("box__train__head", 2, null, 0, -300, items[0].src)
+    );
   }
-];
+  for (let n = 1; n < items.length; n++) {
+    let h = 50 - 350 * n;
+    data.push(
+      createListItem("box__train__item", null, null, 2, h, items[n].src)
+    );
+  }
+  return data;
+};
 
 export default function Box() {
   const [scroll, setScroll] = useState(window.scrollY);
+  const data = createList(items);
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
