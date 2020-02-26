@@ -34,6 +34,8 @@ const createList = items => {
       createListItem("box__train__item", null, null, 2, h, items[n].src)
     );
   }
+  let h = 50 - 350 * items.length;
+  data.push(createListItem("box__train__tail", null, null, 2, h, nsjLogo));
   return data;
 };
 

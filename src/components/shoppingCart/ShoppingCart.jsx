@@ -40,7 +40,7 @@ export default function ShoppingCart() {
   const totalPrice = items.reduce((t, i) => t + parseInt(i.price), 0);
 
   return (
-    <div className="shoppingCart" >
+    <div className="shoppingCart">
       <div className="shoppingCart__topBorder" id="shoppingCart">
         <WiggleText>
           ====================================================

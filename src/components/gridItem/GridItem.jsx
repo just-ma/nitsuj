@@ -33,11 +33,20 @@ const SizeBox = ({ title, price }) => {
     <div>
       <div className="gridItem__sizes">
         {buttons.map((b, i) => (
-          <SizeButton key={i} title={b.title} onSelectSize={onSelectSize} size={size} />
+          <SizeButton
+            key={i}
+            title={b.title}
+            onSelectSize={onSelectSize}
+            size={size}
+          />
         ))}
       </div>
       <div className="gridItem__description">
-        {added && <p className="gridItem__confirmation">Added!</p>}
+        {added && (
+          <div className="gridItem__confirmation">
+            <span>Added!</span>
+          </div>
+        )}
         <div className={"gridItem__add " + addClasses}>
           <button
             className={"gridItem__add__button " + addClasses}

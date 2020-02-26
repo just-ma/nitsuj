@@ -69,8 +69,12 @@
 
   &__confirmation {
     position: absolute;
-    color: black;
-    margin: 12px 75px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
   }
 }
 
