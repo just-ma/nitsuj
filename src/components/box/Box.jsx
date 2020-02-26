@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { items } from "../../mockData";
 import nsjLogo from "../../public/nsj.png";
 import "./Box.scss";
@@ -21,7 +22,7 @@ const createListItem = (
   };
 };
 
-const createList = items => {
+const createList = (items, hover) => {
   let data = [createListItem("box__train__main", null, null, 0, null, nsjLogo)];
   if (items.length > 0) {
     data.push(
@@ -35,13 +36,16 @@ const createList = items => {
     );
   }
   let h = 50 - 350 * items.length;
-  data.push(createListItem("box__train__tail", null, null, 2, h, nsjLogo));
+  data.push(
+    createListItem("box__train__tail", null, null, 2, h, hover || nsjLogo)
+  );
   return data;
 };
 
 export default function Box() {
   const [scroll, setScroll] = useState(window.scrollY);
-  const data = createList(items);
+  const hover = useSelector(state => state.cart.hover);
+  const data = createList(items, hover);
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);

@@ -26,7 +26,7 @@ const SizeBox = ({ title, price }) => {
     setSize(null);
     setAddClasses(null);
     setAdded(true);
-    dispatch({ type: "INCREMENT", title: title, size: size, price: price });
+    dispatch({ type: "ADD", title: title, size: size, price: price });
   };
 
   return (

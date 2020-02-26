@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
+import { items } from "../../mockData";
 import "./ShoppingCart.scss";
 
 const RemoveButton = ({ id }) => {
@@ -9,7 +10,7 @@ const RemoveButton = ({ id }) => {
   return (
     <button
       className="shoppingCart__removeButton"
-      onClick={() => dispatch({ type: "DECREMENT", id: id })}
+      onClick={() => dispatch({ type: "REMOVE", id: id })}
     >
       X
     </button>
@@ -17,11 +18,26 @@ const RemoveButton = ({ id }) => {
 };
 
 const Item = ({ id, title, price, bold, button }) => {
+  const dispatch = useDispatch();
+
   let itemClasses = ["shoppingCart__item"];
   bold && itemClasses.push("-bold");
+  let index = items.findIndex(i => i.title === title.split(" (")[0]);
+
+  const onEnter = () => {
+    button && dispatch({ type: "HOVER", src: items[index].src });
+  };
+
+  const onLeave = () => {
+    button && dispatch({ type: "HOVER", src: null });
+  };
 
   return (
-    <div className={itemClasses.join(" ")}>
+    <div
+      className={itemClasses.join(" ")}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
       {title + " "}
       <span>
         {Array(35 - title.length - price.length)
