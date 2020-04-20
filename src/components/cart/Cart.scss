@@ -1,4 +1,4 @@
-.shoppingCart {
+.cart {
   position: relative;
   margin-bottom: 600px;
   cursor: default;
@@ -40,9 +40,14 @@
     margin-left: 10px;
 
     &:hover {
-      width: 200px;
       background-color: black;
       color: white;
+    }
+
+    &:disabled {
+      background-color: transparent;
+      color: grey;
+      border: solid grey 2px;
     }
   }
 

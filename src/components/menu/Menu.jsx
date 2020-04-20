@@ -26,13 +26,13 @@ export default function Menu() {
 
   return (
     <div className="menu">
-      <div className="menu__shoppingCart">
+      <div className="menu__cart">
         {atTop ? (
-          <div className="menu__shoppingCart__scroll">
+          <div className="menu__cart__scroll">
             <WiggleText>(scroll)</WiggleText>
           </div>
         ) : (
-          <a className={"menu__shoppingCart__cart " + cartClasses} href="#shoppingCart">
+          <a className={"menu__cart__cart " + cartClasses} href="#cart">
             cart({count})
           </a>
         )}

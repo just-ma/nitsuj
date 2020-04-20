@@ -3,20 +3,15 @@ import { useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
 import "./GridItem.scss";
 
-const SizeBox = ({ title, price }) => {
+const SizeBox = ({ sku, name, price }) => {
   const [size, setSize] = useState(null);
   const [addClasses, setAddClasses] = useState(null);
   const [added, setAdded] = useState(false);
   const dispatch = useDispatch();
 
-  const buttons = [
-    { title: "S" },
-    { title: "M" },
-    { title: "L" },
-    { title: "XL" }
-  ];
+  const buttons = ["S", "M", "L", "XL"];
 
-  const onSelectSize = title => {
+  const onSelectSize = (title) => {
     setSize(title);
     setAddClasses("-selected");
     setAdded(false);
@@ -26,7 +21,13 @@ const SizeBox = ({ title, price }) => {
     setSize(null);
     setAddClasses(null);
     setAdded(true);
-    dispatch({ type: "ADD", title: title, size: size, price: price });
+    dispatch({
+      type: "ADD",
+      name: name,
+      size: size,
+      price: price,
+      sku: sku[size],
+    });
   };
 
   return (
@@ -35,7 +36,7 @@ const SizeBox = ({ title, price }) => {
         {buttons.map((b, i) => (
           <SizeButton
             key={i}
-            title={b.title}
+            name={b}
             onSelectSize={onSelectSize}
             size={size}
           />
@@ -60,28 +61,28 @@ const SizeBox = ({ title, price }) => {
   );
 };
 
-const SizeButton = ({ title, onSelectSize, size }) => {
+const SizeButton = ({ name, onSelectSize, size }) => {
   let classes = ["sizeButton"];
-  size === title && classes.push("-selected");
+  size === name && classes.push("-selected");
 
   return (
-    <button className={classes.join(" ")} onClick={() => onSelectSize(title)}>
-      {title}
+    <button className={classes.join(" ")} onClick={() => onSelectSize(name)}>
+      {name}
     </button>
   );
 };
 
-export default function GridItem({ title, price }) {
+export default function GridItem({ sku, name, price }) {
   return (
     <div className="gridItem">
       <div className="gridItem__left">
-        <WiggleText>{title}</WiggleText>
+        <WiggleText>{name}</WiggleText>
         <span className="price">
           <WiggleText>{"$" + price}</WiggleText>
         </span>
       </div>
       <div className="gridItem__right">
-        <SizeBox title={title} price={price} />
+        <SizeBox sku={sku} name={name} price={price} />
       </div>
     </div>
   );

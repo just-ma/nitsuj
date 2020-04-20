@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { items } from "../../mockData";
 import nsjLogo from "../../public/nsj.png";
 import "./Box.scss";
 
@@ -18,7 +17,7 @@ const createListItem = (
     heightOffset: heightOffset,
     top: top,
     topOffset: topOffset,
-    src: src
+    src: src,
   };
 };
 
@@ -42,9 +41,9 @@ const createList = (items, hover) => {
   return data;
 };
 
-export default function Box() {
+export default function Box({ items }) {
   const [scroll, setScroll] = useState(window.scrollY);
-  const hover = useSelector(state => state.cart.hover);
+  const hover = useSelector((state) => state.cart.hover);
   const data = createList(items, hover);
 
   useEffect(() => {

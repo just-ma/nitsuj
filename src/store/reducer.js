@@ -3,7 +3,7 @@ import { createStore, combineReducers } from "redux";
 const cartState = {
   items: [],
   count: 0,
-  hover: null
+  hover: null,
 };
 
 const cartReducer = (state = cartState, action) => {
@@ -16,17 +16,18 @@ const cartReducer = (state = cartState, action) => {
           ...state.items,
           {
             id: newCount,
-            title: action.title,
+            name: action.name,
             size: action.size,
-            price: action.price
-          }
-        ]
+            price: action.price,
+            sku: action.sku,
+          },
+        ],
       };
     case "REMOVE":
-      let index = state.items.findIndex(i => i.id === action.id);
-      let newItems = [...state.items];
-      newItems.splice(index, 1);
-      return { ...state, items: newItems };
+      return {
+        ...state,
+        items: state.items.filter((i) => i.id !== action.id),
+      };
     case "HOVER":
       return { ...state, hover: action.src };
     default:
