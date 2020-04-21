@@ -27,6 +27,7 @@ const cartReducer = (state = cartState, action) => {
       return {
         ...state,
         items: state.items.filter((i) => i.id !== action.id),
+        hover: null,
       };
     case "HOVER":
       return { ...state, hover: action.src };

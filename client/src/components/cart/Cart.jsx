@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
-import { items } from "../../mockData";
 import "./Cart.scss";
 
 const RemoveButton = ({ id }) => {
@@ -17,15 +16,15 @@ const RemoveButton = ({ id }) => {
   );
 };
 
-const Item = ({ id, name, price, bold, button }) => {
+const Item = ({ id, name, price, bold, button, products }) => {
   const dispatch = useDispatch();
 
   let itemClasses = ["cart__item"];
   bold && itemClasses.push("-bold");
-  let index = items.findIndex((i) => i.name === name.split(" (")[0]);
+  let index = products.findIndex((i) => i.name === name.split(" (")[0]);
 
   const onEnter = () => {
-    button && dispatch({ type: "HOVER", src: items[index].src });
+    button && dispatch({ type: "HOVER", src: products[index].src });
   };
 
   const onLeave = () => {
@@ -50,7 +49,7 @@ const Item = ({ id, name, price, bold, button }) => {
   );
 };
 
-export default function Cart({ stripeToken }) {
+export default function Cart({ stripeToken, products }) {
   const [stripe, setStripe] = useState(null);
 
   useEffect(() => {
@@ -77,6 +76,8 @@ export default function Cart({ stripeToken }) {
       quantity: item[1],
     }));
 
+    console.log(stripeItems, items);
+
     stripe.redirectToCheckout({
       items: stripeItems,
       successUrl: "https://nitsuj.bigcartel.com/success",
@@ -99,11 +100,21 @@ export default function Cart({ stripeToken }) {
             name={`${i.name} (${i.size})`}
             price={i.price}
             button
+            products={products}
           />
         ))}
         <div className="cart__break" />
-        <Item bold name={"SUBTOTAL"} price={totalPrice.toString()} />
-        <button className={"cart__checkout"} onClick={checkout} disabled={items.length === 0}>
+        <Item
+          bold
+          name={"SUBTOTAL"}
+          price={totalPrice.toString()}
+          products={products}
+        />
+        <button
+          className={"cart__checkout"}
+          onClick={checkout}
+          disabled={items.length === 0}
+        >
           Checkout
         </button>
       </div>

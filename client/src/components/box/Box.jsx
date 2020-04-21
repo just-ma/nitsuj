@@ -41,10 +41,10 @@ const createList = (items, hover) => {
   return data;
 };
 
-export default function Box({ items }) {
+export default function Box({ products }) {
   const [scroll, setScroll] = useState(window.scrollY);
   const hover = useSelector((state) => state.cart.hover);
-  const data = createList(items, hover);
+  const data = createList(products, hover);
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
