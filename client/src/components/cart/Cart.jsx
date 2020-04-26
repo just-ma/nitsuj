@@ -62,6 +62,18 @@ export default function Cart({ stripeToken, products }) {
 
   const totalPrice = items.reduce((t, i) => t + i.price, 0);
 
+  const callApi = async () => {
+    const response = await fetch("/api/checkout", { method: "POST" });
+    const body = await response.json();
+    stripe
+      .redirectToCheckout({
+        sessionId: body.session.id,
+      })
+      .then((res) => console.log("after", res));
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
   const checkout = () => {
     let count = new Map();
 
@@ -76,13 +88,9 @@ export default function Cart({ stripeToken, products }) {
       quantity: item[1],
     }));
 
-    console.log(stripeItems, items);
-
-    stripe.redirectToCheckout({
-      items: stripeItems,
-      successUrl: "https://nitsuj.bigcartel.com/success",
-      cancelUrl: "https://nitsuj.bigcartel.com/canceled",
-    });
+    callApi()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (

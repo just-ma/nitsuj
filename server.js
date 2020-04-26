@@ -13,14 +13,12 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.post("/api/world", (req, res) => {
-  console.log(req.body);
   res.send(
     `I received your POST request. This is what you sent me: ${req.body.post}`
   );
 });
 
 app.get("/api/products", async (req, res) => {
-  console.log("HERE");
   try {
     let products = await stripe.products.list();
     let skus = await stripe.skus.list({ limit: products.data.length * 4 });
@@ -43,6 +41,30 @@ app.get("/api/products", async (req, res) => {
     });
 
     return res.json({ products: Object.values(prodMap) });
+  } catch (err) {
+    return res.status(500).send("an error occurred");
+  }
+});
+
+app.post("/api/checkout", async (req, res) => {
+  try {
+    let session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          name: "cool bean",
+          amount: 200,
+          currency: "usd",
+          quantity: 10,
+        },
+      ],
+      shipping_address_collection: {
+        allowed_countries: ["US", "CA"],
+      },
+      success_url: "https://nitsuj.bigcartel.com/success",
+      cancel_url: "https://nitsuj.bigcartel.com/cancel",
+    });
+    return res.json({ session: session });
   } catch (err) {
     return res.status(500).send("an error occurred");
   }
