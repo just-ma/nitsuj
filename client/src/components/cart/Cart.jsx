@@ -16,15 +16,14 @@ const RemoveButton = ({ id }) => {
   );
 };
 
-const Item = ({ id, name, price, bold, button, products }) => {
+const Item = ({ id, name, price, bold, src, button }) => {
   const dispatch = useDispatch();
 
   let itemClasses = ["cart__item"];
   bold && itemClasses.push("-bold");
-  let index = products.findIndex((i) => i.name === name.split(" (")[0]);
 
   const onEnter = () => {
-    button && dispatch({ type: "HOVER", src: products[index].src });
+    button && dispatch({ type: "HOVER", src: src });
   };
 
   const onLeave = () => {
@@ -49,7 +48,7 @@ const Item = ({ id, name, price, bold, button, products }) => {
   );
 };
 
-export default function Cart({ stripeToken, products }) {
+export default function Cart({ stripeToken }) {
   const [stripe, setStripe] = useState(null);
 
   useEffect(() => {
@@ -62,35 +61,26 @@ export default function Cart({ stripeToken, products }) {
 
   const totalPrice = items.reduce((t, i) => t + i.price, 0);
 
-  const callApi = async () => {
-    const response = await fetch("/api/checkout", { method: "POST" });
-    const body = await response.json();
-    stripe
-      .redirectToCheckout({
-        sessionId: body.session.id,
-      })
-      .then((res) => console.log("after", res));
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-
-  const checkout = () => {
-    let count = new Map();
-
-    items
-      .map((i) => i.sku)
-      .forEach((sku) => {
-        count.set(sku, count.get(sku) + 1 || 1);
-      });
-
-    let stripeItems = Array.from(count.entries()).map((item) => ({
-      sku: item[0],
-      quantity: item[1],
-    }));
-
-    callApi()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  const checkout = async () => {
+    const settings = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(items),
+    };
+    try {
+      const res = await fetch("/api/checkout", settings);
+      const data = await res.json();
+      stripe
+        .redirectToCheckout({
+          sessionId: data.session.id,
+        })
+        .then((res) => console.log("after", res));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -105,19 +95,14 @@ export default function Cart({ stripeToken, products }) {
           <Item
             key={i.id}
             id={i.id}
-            name={`${i.name} (${i.size})`}
+            name={i.name}
             price={i.price}
+            src={i.src}
             button
-            products={products}
           />
         ))}
         <div className="cart__break" />
-        <Item
-          bold
-          name={"SUBTOTAL"}
-          price={totalPrice.toString()}
-          products={products}
-        />
+        <Item bold name={"SUBTOTAL"} price={totalPrice.toString()} />
         <button
           className={"cart__checkout"}
           onClick={checkout}

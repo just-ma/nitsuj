@@ -1,16 +1,7 @@
-var express = require('express')
-var router = express.Router()
+var express = require("express");
+var router = express.Router();
+
 const stripe = require("stripe")("sk_test_bKCmhCTHCYeGBWQNrxqnahFY00vDsOqqmb");
-
-router.get("/api/hello", (req, res) => {
-  res.send({ express: "Hello From Express" });
-});
-
-router.post("/api/world", (req, res) => {
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`
-  );
-});
 
 router.get("/api/products", async (req, res) => {
   try {
@@ -20,7 +11,7 @@ router.get("/api/products", async (req, res) => {
     let prodMap = {};
     products.data.forEach((product) => {
       prodMap[product.id] = {
-        sku: {},
+        // sku: {},
         name: product.name,
         price: 0,
         src: null,
@@ -29,9 +20,12 @@ router.get("/api/products", async (req, res) => {
 
     skus.data.forEach((sku) => {
       let p = sku.product;
-      prodMap[p].sku[sku.attributes.name] = sku.id;
-      prodMap[p].price = sku.price / 100;
-      prodMap[p].src = sku.image;
+      let size = sku.attributes.name;
+      // prodMap[p].sku[size] = sku.id;
+      if (size === "S") {
+        prodMap[p].price = sku.price / 100;
+        prodMap[p].src = sku.image;
+      }
     });
 
     return res.json({ products: Object.values(prodMap) });
@@ -41,19 +35,68 @@ router.get("/api/products", async (req, res) => {
 });
 
 router.post("/api/checkout", async (req, res) => {
+  const items = req.body;
+  let itemsMap = {};
+
+  items.forEach((i) => {
+    if (itemsMap[i.name]) {
+      itemsMap[i.name].quantity++;
+    } else {
+      itemsMap[i.name] = {
+        name: i.name,
+        quantity: 1,
+        currency: "usd",
+        amount: i.price * 100,
+        images: [i.src],
+      };
+    }
+  });
+
+  const line_items = Object.values(itemsMap);
+  const countries = [
+    "US",
+    "CA",
+    "AU",
+    "AT",
+    "BE",
+    "CZ",
+    "DK",
+    "EE",
+    "FI",
+    "FR",
+    "DE",
+    "GR",
+    "HK",
+    "IN",
+    "IE",
+    "IT",
+    "JP",
+    "LV",
+    "LT",
+    "LU",
+    "MY",
+    "MX",
+    "NL",
+    "NZ",
+    "NO",
+    "PL",
+    "PT",
+    "RO",
+    "SG",
+    "SK",
+    "SI",
+    "ES",
+    "SE",
+    "CH",
+    "GB",
+  ];
+
   try {
     let session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: [
-        {
-          name: "cool bean",
-          amount: 200,
-          currency: "usd",
-          quantity: 10,
-        },
-      ],
+      line_items: line_items,
       shipping_address_collection: {
-        allowed_countries: ["US", "CA"],
+        allowed_countries: countries,
       },
       success_url: "https://nitsuj.bigcartel.com/success",
       cancel_url: "https://nitsuj.bigcartel.com/cancel",
@@ -64,4 +107,4 @@ router.post("/api/checkout", async (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;

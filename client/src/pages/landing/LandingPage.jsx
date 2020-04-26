@@ -3,21 +3,22 @@ import Grid from "../../components/grid/Grid";
 import Box from "../../components/box/Box";
 import Menu from "../../components/menu/Menu";
 
-const callApi = async () => {
-  const response = await fetch("/api/products");
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
-};
-
 export default function LandingPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    callApi()
-      .then((res) => setProducts(res.products))
-      .catch((err) => console.log(err));
+    getProducts();
   }, []);
+
+  const getProducts = async () => {
+    try {
+      const res = await fetch("/api/products");
+      const body = await res.json();
+      setProducts(body.products);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div>

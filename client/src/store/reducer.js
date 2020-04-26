@@ -17,9 +17,8 @@ const cartReducer = (state = cartState, action) => {
           {
             id: newCount,
             name: action.name,
-            size: action.size,
             price: action.price,
-            sku: action.sku,
+            src: action.src,
           },
         ],
       };

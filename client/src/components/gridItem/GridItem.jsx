@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
 import "./GridItem.scss";
 
-const SizeBox = ({ sku, name, price }) => {
+const SizeBox = ({ name, price, src }) => {
   const [size, setSize] = useState(null);
   const [addClasses, setAddClasses] = useState(null);
   const [added, setAdded] = useState(false);
@@ -23,10 +23,9 @@ const SizeBox = ({ sku, name, price }) => {
     setAdded(true);
     dispatch({
       type: "ADD",
-      name: name,
-      size: size,
+      name: `${name} (${size})`,
+      src: src,
       price: price,
-      sku: sku[size],
     });
   };
 
@@ -72,7 +71,7 @@ const SizeButton = ({ name, onSelectSize, size }) => {
   );
 };
 
-export default function GridItem({ sku, name, price }) {
+export default function GridItem({ name, price, src }) {
   return (
     <div className="gridItem">
       <div className="gridItem__left">
@@ -82,7 +81,7 @@ export default function GridItem({ sku, name, price }) {
         </span>
       </div>
       <div className="gridItem__right">
-        <SizeBox sku={sku} name={name} price={price} />
+        <SizeBox name={name} price={price} src={src} />
       </div>
     </div>
   );
