@@ -25,16 +25,16 @@ const createList = (items, hover) => {
   let data = [createListItem("box__train__main", null, null, 0, null, nsjLogo)];
   if (items.length > 0) {
     data.push(
-      createListItem("box__train__head", 2, null, 0, -300, items[0].src)
+      createListItem("box__train__head", 2, 100, 0, -300, items[0].src)
     );
   }
   for (let n = 1; n < items.length; n++) {
-    let h = 50 - 350 * n;
+    let h = 100-500 * n;
     data.push(
       createListItem("box__train__item", null, null, 2, h, items[n].src)
     );
   }
-  let h = 50 - 350 * items.length;
+  let h = 100-500 * items.length;
   data.push(
     createListItem("box__train__tail", null, null, 2, h, hover || nsjLogo)
   );
@@ -59,10 +59,10 @@ export default function Box({ products }) {
   return (
     <div>
       <div className="box">
-        <div className="box__train" style={{ top: -scroll * 0.7 }}>
+        <div className="box__train" style={{ top: -scroll }}>
           {data.map((e, i) => {
             let h = itemVar[e.height] + e.heightOffset;
-            let t = scroll * 0.7 - itemVar[e.top] + e.topOffset;
+            let t = scroll - itemVar[e.top] + e.topOffset;
             return (
               <div
                 key={i}
