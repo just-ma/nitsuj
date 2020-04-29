@@ -1,0 +1,78 @@
+.success {
+  position: absolute;
+  width: 500px;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%,0);
+  padding-bottom: 200px;
+
+  &__header {
+    margin-left: 110px;
+  }
+
+  &__message {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &__text {
+      width: 200px;
+      text-align: center;
+    }
+  }
+
+  &__items {
+    margin-top: 70px;
+
+    &__total {
+      position: absolute;
+      right: 0px;
+      display: flex;
+      width: 100px;
+      justify-content: space-between;
+    }
+  }
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  &__image {
+    height: 70px;
+    width: 70px;
+  }
+
+  &__name {
+    width: 200px;
+  }
+}
+
+.shipping {
+  margin-top: 100px;
+  white-space: pre-line;
+  display: flex;
+  justify-content: space-between;
+
+  &__vertical {
+    width: 0;
+    border: 0.5px black solid;
+  }
+
+  &__box {
+    width: 45%;
+  }
+}
+
+.backButton {
+  text-decoration: underline;
+}
+
+.back {
+  position: fixed;
+  top: 60px;
+  left: 100px;
+}

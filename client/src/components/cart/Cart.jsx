@@ -77,7 +77,6 @@ export default function Cart({ stripeToken }) {
         .redirectToCheckout({
           sessionId: data.session.id,
         })
-        .then((res) => console.log("after", res));
     } catch (err) {
       console.error(err);
     }
