@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import WiggleText from "../../components/wiggleText/WiggleText";
+import Loading from "../../components/loading/Loading";
 import "./SuccessPage.scss";
 
 const ListItem = ({ name, price, quantity, src }) => {
@@ -45,8 +47,10 @@ export default function SuccessPage() {
   const [shipping, setShipping] = useState("");
   const [email, setEmail] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    localStorage.setItem("nitsuj_apparel_shopping_cart", JSON.stringify([]));
+    dispatch({ type: "CLEAR" });
     getSession();
   }, []);
 
@@ -73,7 +77,9 @@ export default function SuccessPage() {
     }
   };
 
-  return (
+  return items.length === 0 ? (
+    <Loading />
+  ) : (
     <div>
       <div className="success">
         <div className="success__header">

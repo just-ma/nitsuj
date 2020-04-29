@@ -8,6 +8,10 @@ const cartState = {
   hover: null,
 };
 
+const setLocalStorage = (items) => {
+  localStorage.setItem("nitsuj_apparel_shopping_cart", JSON.stringify(items));
+};
+
 const cartReducer = (state = cartState, action) => {
   let newItems;
   switch (action.type) {
@@ -22,24 +26,25 @@ const cartReducer = (state = cartState, action) => {
           src: action.src,
         },
       ];
-      localStorage.setItem(
-        "nitsuj_apparel_shopping_cart",
-        JSON.stringify(newItems)
-      );
+      setLocalStorage(newItems);
       return {
         count: newCount,
         items: newItems,
       };
     case "REMOVE":
       newItems = state.items.filter((i) => i.id !== action.id);
-      localStorage.setItem(
-        "nitsuj_apparel_shopping_cart",
-        JSON.stringify(newItems)
-      );
+      setLocalStorage(newItems);
       return {
         ...state,
         items: newItems,
         hover: null,
+      };
+    case "CLEAR":
+      newItems = [];
+      setLocalStorage(newItems);
+      return {
+        ...state,
+        items: newItems,
       };
     case "HOVER":
       return { ...state, hover: action.src };
