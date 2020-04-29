@@ -13,7 +13,7 @@ const ListItem = ({ name, price, quantity, src }) => {
   );
 };
 
-const ShippingAddress = ({ shipping }) => {
+const ShippingAddress = ({ shipping, email }) => {
   return (
     <div className="shipping">
       <div className="shipping__box">
@@ -22,8 +22,9 @@ const ShippingAddress = ({ shipping }) => {
       </div>
       <div className="shipping__vertical"></div>
       <div className="shipping__box">
-        <p>BILL TO:</p>
-        <div>{shipping}</div>
+        <br />
+        <br />
+        <p>A reciept will be sent to {email}</p>
       </div>
     </div>
   );
@@ -45,12 +46,12 @@ export default function SuccessPage() {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
+    localStorage.setItem("nitsuj_apparel_shopping_cart", JSON.stringify([]));
     getSession();
   }, []);
 
   const getSession = async () => {
     const checkoutId = window.location.href.split("?session_id=")[1];
-    console.log(checkoutId);
     const settings = {
       method: "POST",
       headers: {
@@ -67,8 +68,6 @@ export default function SuccessPage() {
       setTotalPrice(data.totalPrice);
       setShipping(data.shipping);
       setEmail(data.email);
-
-      console.log(data);
     } catch (err) {
       console.error(err);
     }
@@ -79,11 +78,6 @@ export default function SuccessPage() {
       <div className="success">
         <div className="success__header">
           <WiggleText>THANK YOU FOR YOUR ORDER</WiggleText>
-        </div>
-        <div className="success__message">
-          <div className="success__message__text">
-            A confirmation email will be sent to {email}
-          </div>
         </div>
         <div className="success__items">
           {items.map((i) => (
@@ -100,7 +94,7 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        <ShippingAddress shipping={shipping} />
+        <ShippingAddress shipping={shipping} email={email} />
       </div>
       <div className="back">
         <BackButton />

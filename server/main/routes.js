@@ -63,7 +63,7 @@ router.post("/api/checkout", async (req, res) => {
       },
       success_url:
         "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "http://localhost:3000/cancel",
+      cancel_url: "http://localhost:3000/#cart",
     });
     return res.json({ session: session });
   } catch (err) {

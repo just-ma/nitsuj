@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import nsjLogo from "../../public/nsj.png";
+import nsjLogo from "../../assets/nsj.png";
 import "./Box.scss";
 
 const createListItem = (
