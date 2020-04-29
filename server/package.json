@@ -1,23 +1,11 @@
 {
   "name": "nitsuj-server",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "express": "^4.16.4",
-    "stripe": "^8.44.0",
-    "cookie-parser": "~1.4.3",
-    "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "helmet": "^3.15.1",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.0",
-    "pg": "^7.8.0"
-  },
-  "devDependencies": {
-    "concurrently": "^4.0.1"
+    "stripe": "^8.44.0"
   }
 }
