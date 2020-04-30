@@ -1,15 +1,17 @@
 import { createStore, combineReducers } from "redux";
 
 const cachedItems = localStorage.getItem("nitsuj_apparel_shopping_cart");
+const cachedCount = localStorage.getItem("nitsuj_apparel_cart_count");
 
 const cartState = {
   items: cachedItems ? JSON.parse(cachedItems) : [],
-  count: 0,
+  count: cachedCount || 0,
   hover: null,
 };
 
-const setLocalStorage = (items) => {
+const setLocalStorage = (items, count) => {
   localStorage.setItem("nitsuj_apparel_shopping_cart", JSON.stringify(items));
+  localStorage.setItem("nitsuj_apparel_cart_count", count);
 };
 
 const cartReducer = (state = cartState, action) => {
@@ -26,22 +28,21 @@ const cartReducer = (state = cartState, action) => {
           src: action.src,
         },
       ];
-      setLocalStorage(newItems);
+      setLocalStorage(newItems, newCount);
       return {
         count: newCount,
         items: newItems,
       };
     case "REMOVE":
       newItems = state.items.filter((i) => i.id !== action.id);
-      setLocalStorage(newItems);
+      setLocalStorage(newItems, state.count);
       return {
         ...state,
         items: newItems,
         hover: null,
       };
     case "CLEAR":
-      newItems = [];
-      setLocalStorage(newItems);
+      setLocalStorage([], 0);
       return {
         ...state,
         items: newItems,

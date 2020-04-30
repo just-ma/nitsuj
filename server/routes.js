@@ -15,18 +15,26 @@ router.get("/api/products", async (req, res) => {
         name: product.name,
         price: 0,
         src: null,
+        src2: null,
+        src3: [],
       };
     });
 
     skus.data.forEach((sku) => {
       let p = sku.product;
       let size = sku.attributes.name;
-      if (size === "S") {
-        prodMap[p].price = sku.price / 100;
-        prodMap[p].src = sku.image;
+      switch (size) {
+        case "S":
+          prodMap[p].price = sku.price / 100;
+          prodMap[p].src = sku.image;
+          break;
+        case "M":
+          prodMap[p].src2 = sku.image;
+          break;
+        default:
+          sku.image && prodMap[p].src3.push(sku.image);
       }
     });
-
     return res.json({ products: Object.values(prodMap) });
   } catch (err) {
     return res.status(500).send("an error occurred");

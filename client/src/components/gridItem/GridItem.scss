@@ -18,6 +18,7 @@
   &__right {
     flex: 16;
     margin-left: 50px;
+    pointer-events: auto;
   }
 
   &__sizes {
