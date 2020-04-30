@@ -12,7 +12,8 @@ const createListItem = (
   topOffset,
   src,
   src2,
-  src3
+  src3,
+  zoom
 ) => {
   return {
     className: className,
@@ -23,12 +24,23 @@ const createListItem = (
     src: src,
     src2: src2,
     src3: src3,
+    zoom: zoom,
   };
 };
 
 const createList = (items, hover) => {
   let data = [
-    createListItem("box__train__main", null, null, 0, null, nsjLogo, null, []),
+    createListItem(
+      "box__train__main",
+      null,
+      null,
+      0,
+      null,
+      nsjLogo,
+      null,
+      [],
+      false
+    ),
   ];
   if (items.length > 0) {
     data.push(
@@ -40,7 +52,8 @@ const createList = (items, hover) => {
         -300,
         items[0].src,
         items[0].src2,
-        items[0].src3
+        items[0].src3,
+        true
       )
     );
   }
@@ -55,7 +68,8 @@ const createList = (items, hover) => {
         h,
         items[n].src,
         items[n].src2,
-        items[n].src3
+        items[n].src3,
+        true
       )
     );
   }
@@ -69,7 +83,8 @@ const createList = (items, hover) => {
       h,
       hover || nsjLogo,
       null,
-      []
+      [],
+      false
     )
   );
   return data;
@@ -108,6 +123,7 @@ export default function Box({ products }) {
                     primary={e.src}
                     secondary={e.src2}
                     remainder={e.src3}
+                    zoom={e.zoom}
                   />
                 </div>
               </div>
