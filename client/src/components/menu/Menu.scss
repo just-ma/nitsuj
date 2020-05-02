@@ -4,28 +4,43 @@
   right: 50%;
   transform: translate(0, calc(-50% + 180px));
   width: 300px;
-  display: flex;
-  justify-content: center;
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
 
   &__cart {
-    &__cart {
-      color: black;
-      font-size: 14px;
-      text-decoration: none;
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 35px;
 
-      &.-blinking {
-        animation: blink infinite 1.5s linear;
-      }
-
-      &:hover {
-        text-decoration: underline;
-      }
+    &.-blinking {
+      animation: blink infinite 1.5s linear;
     }
 
-    &__scroll {
-      position: absolute;
-      top: 0px;
-      left: 100px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__scroll {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+  }
+
+  &__info {
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 10px;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

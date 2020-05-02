@@ -3,7 +3,7 @@
   width: 500px;
   top: 100px;
   left: 50%;
-  transform: translate(-50%,0);
+  transform: translate(-50%, 0);
   padding-bottom: 150px;
 
   &__header {
@@ -55,12 +55,14 @@
   }
 }
 
-.backButton {
-  text-decoration: underline;
-}
-
 .back {
   position: fixed;
   top: 60px;
   left: 100px;
+  text-decoration: none;
+  color: black;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }

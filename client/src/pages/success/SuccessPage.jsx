@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import WiggleText from "../../components/wiggleText/WiggleText";
 import Loading from "../../components/loading/Loading";
 import "./SuccessPage.scss";
@@ -7,7 +8,7 @@ import "./SuccessPage.scss";
 const ListItem = ({ name, price, quantity, src }) => {
   return (
     <div className="listItem">
-      <img className="listItem__image" src={src} />
+      <img className="listItem__image" src={src} alt="thumbnail"/>
       <span className="listItem__name">{name}</span>
       <span>{"Qty " + quantity}</span>
       <span>{"$" + price}</span>
@@ -29,14 +30,6 @@ const ShippingAddress = ({ shipping, email }) => {
         <p>A reciept will be sent to {email}</p>
       </div>
     </div>
-  );
-};
-
-const BackButton = () => {
-  return (
-    <a className="backButton" href="/">
-      {"<BACK"}
-    </a>
   );
 };
 
@@ -88,6 +81,7 @@ export default function SuccessPage() {
         <div className="success__items">
           {items.map((i) => (
             <ListItem
+              key={i.name}
               name={i.name}
               price={i.price}
               quantity={i.quantity}
@@ -102,9 +96,9 @@ export default function SuccessPage() {
 
         <ShippingAddress shipping={shipping} email={email} />
       </div>
-      <div className="back">
-        <BackButton />
-      </div>
+      <Link className="back" to="/">
+        {"<BACK"}
+      </Link>
     </div>
   );
 }

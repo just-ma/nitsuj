@@ -16,9 +16,10 @@ const setLocalStorage = (items, count) => {
 
 const cartReducer = (state = cartState, action) => {
   let newItems;
+  let newCount;
   switch (action.type) {
     case "ADD":
-      let newCount = state.count + 1;
+      newCount = state.count + 1;
       newItems = [
         ...state.items,
         {
@@ -42,10 +43,13 @@ const cartReducer = (state = cartState, action) => {
         hover: null,
       };
     case "CLEAR":
-      setLocalStorage([], 0);
+      newItems = [];
+      newCount = 0;
+      setLocalStorage(newItems, newCount);
       return {
         ...state,
         items: newItems,
+        count: newCount,
       };
     case "HOVER":
       return { ...state, hover: action.src };

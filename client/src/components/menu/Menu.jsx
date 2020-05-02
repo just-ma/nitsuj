@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Menu.scss";
 import WiggleText from "../wiggleText/WiggleText";
 
 export default function Menu() {
   const [atTop, setAtTop] = useState(window.scrollY === 0);
-  const [cartClasses, setCartClasses] = useState("");
-  const count = useSelector(state => state.cart.items.length);
+  const [cartEmpty, setCartEmpty] = useState(false);
+  const count = useSelector((state) => state.cart.items.length);
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
+    return function removeListener() {
+      document.removeEventListener("scroll", toggleScroll);
+    };
   }, []);
 
   useEffect(() => {
-    if (count === 0) {
-      setCartClasses("");
-    } else {
-      setCartClasses("-blinking");
-    }
+    setCartEmpty(count === 0);
   }, [count]);
 
   const toggleScroll = () => {
@@ -26,17 +26,23 @@ export default function Menu() {
 
   return (
     <div className="menu">
-      <div className="menu__cart">
-        {atTop ? (
-          <div className="menu__cart__scroll">
-            <WiggleText>(scroll)</WiggleText>
-          </div>
-        ) : (
-          <a className={"menu__cart__cart " + cartClasses} href="#cart">
+      {atTop ? (
+        <div className="menu__scroll">
+          <WiggleText>(scroll)</WiggleText>
+        </div>
+      ) : (
+        <div className="menu__items">
+          <a
+            className={"menu__cart" + (cartEmpty ? "" : " -blinking")}
+            href="#cart"
+          >
             cart({count})
           </a>
-        )}
-      </div>
+          <Link className="menu__info" to="/info">
+            info
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

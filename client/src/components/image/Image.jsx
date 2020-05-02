@@ -12,10 +12,12 @@ const Gallery = ({ images, onClick }) => {
       <div className="gallery__column">
         {images.map((i) => (
           <img
+            key={i}
             className="gallery__image"
             src={i}
             style={{ height: 0.85 * window.innerHeight }}
             onClick={imageClick}
+            alt="close-up"
           />
         ))}
       </div>

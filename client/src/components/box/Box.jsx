@@ -97,6 +97,9 @@ export default function Box({ products }) {
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
+    return function removeListener() {
+      document.removeEventListener("scroll", toggleScroll);
+    };
   }, []);
 
   const toggleScroll = () => {
