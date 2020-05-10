@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 var constants = require("./constants");
-
-const stripe = require("stripe")("sk_test_bKCmhCTHCYeGBWQNrxqnahFY00vDsOqqmb");
+var config = require("./config");
+const nodemailer = require("nodemailer");
+const stripe = require("stripe")(config.STRIPE_KEY);
 
 router.get("/api/products", async (req, res) => {
   try {
@@ -81,7 +82,7 @@ router.post("/api/checkout", async (req, res) => {
 
 router.post("/api/session", async (req, res) => {
   const sessionId = req.body.checkoutId;
-  let name, items, totalPrice, shipping, email, customerId;
+  let name, items, totalPrice, shipping, email, customerId, paymentId, emailed;
 
   try {
     let session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -101,6 +102,7 @@ router.post("/api/session", async (req, res) => {
       ${shipRes.city}${shipRes.state ? ` ${shipRes.state}` : ``}, ${
       shipRes.postal_code
     }, ${shipRes.country}`;
+    paymentId = session.payment_intent;
   } catch (err) {
     return res.status(500).send("an error occurred");
   }
@@ -108,13 +110,74 @@ router.post("/api/session", async (req, res) => {
   try {
     let customer = await stripe.customers.retrieve(customerId);
     email = customer.email;
-    return res.json({
-      name: name,
-      items: items,
-      totalPrice: totalPrice,
-      shipping: shipping,
-      email: email,
-    });
+  } catch (err) {
+    return res.status(500).send("an error occurred");
+  }
+
+  try {
+    let paymentIntent = await stripe.paymentIntents.retrieve(paymentId);
+    emailed = paymentIntent.metadata.emailed;
+  } catch (err) {
+    return res.status(500).send("an error occurred");
+  }
+
+  if (!emailed) {
+    try {
+      await stripe.paymentIntents.update(paymentId, {
+        metadata: { emailed: true },
+      });
+    } catch (err) {
+      return res.status(500).send("an error occurred");
+    }
+  }
+
+  return res.json({
+    name: name,
+    items: items,
+    totalPrice: totalPrice,
+    shipping: shipping,
+    email: email,
+    emailed: emailed,
+  });
+});
+
+router.post("/api/email", async (req, res) => {
+  const nameArr = req.body.name.split(" ");
+  const name = nameArr.length === 2 ? nameArr[0] : req.body.name;
+  const items = req.body.items;
+  const url = req.body.url;
+  const email = req.body.email;
+
+  const generateEmail = () => {
+    return `Hey ${name},
+    
+Thanks for your order!
+    
+${items.map((i) => `\t${i}`).join("\n")}
+
+For more details, please visit here: ${url}. For any questions or concerns, please reply to this email.
+    
+Cheers,
+Justin`;
+  };
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nit.su.j.apparel@gmail.com",
+      pass: config.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: "nit.su.j.apparel@gmail.com",
+    to: email,
+    subject: "NIT SU J. Order Confirmed",
+    text: generateEmail(),
+  };
+
+  try {
+    transporter.sendMail(mailOptions);
   } catch (err) {
     return res.status(500).send("an error occurred");
   }

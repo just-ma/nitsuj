@@ -1,6 +1,6 @@
 .cart {
   position: relative;
-  margin-bottom: 600px;
+  margin-bottom: 400px;
   cursor: default;
   pointer-events: auto;
 
@@ -39,6 +39,7 @@
     transition: ease 0.2s;
     background-color: transparent;
     margin-left: 10px;
+    margin-bottom: 200px;
 
     &:hover {
       background-color: black;

@@ -66,3 +66,11 @@
     text-decoration: underline;
   }
 }
+
+.email {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

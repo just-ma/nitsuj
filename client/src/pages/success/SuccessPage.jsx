@@ -8,7 +8,7 @@ import "./SuccessPage.scss";
 const ListItem = ({ name, price, quantity, src }) => {
   return (
     <div className="listItem">
-      <img className="listItem__image" src={src} alt="thumbnail"/>
+      <img className="listItem__image" src={src} alt="thumbnail" />
       <span className="listItem__name">{name}</span>
       <span>{"Qty " + quantity}</span>
       <span>{"$" + price}</span>
@@ -16,7 +16,14 @@ const ListItem = ({ name, price, quantity, src }) => {
   );
 };
 
-const ShippingAddress = ({ shipping, email }) => {
+const ShippingAddress = ({ shipping, email, postEmail }) => {
+  const [emailed, setEmailed] = useState(false);
+
+  const sendEmail = () => {
+    setEmailed(true);
+    postEmail();
+  };
+
   return (
     <div className="shipping">
       <div className="shipping__box">
@@ -26,8 +33,14 @@ const ShippingAddress = ({ shipping, email }) => {
       <div className="shipping__vertical"></div>
       <div className="shipping__box">
         <br />
-        <br />
-        <p>A reciept will be sent to {email}</p>
+        <p>An order confirmation will be sent to {email}</p>
+        {emailed ? (
+          <p>Sent!</p>
+        ) : (
+          <p className="email" onClick={sendEmail}>
+            Click here to resend
+          </p>
+        )}
       </div>
     </div>
   );
@@ -39,6 +52,7 @@ export default function SuccessPage() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [shipping, setShipping] = useState("");
   const [email, setEmail] = useState("");
+  const [emailed, setEmailed] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -46,6 +60,10 @@ export default function SuccessPage() {
     dispatch({ type: "CLEAR" });
     getSession();
   }, []);
+
+  useEffect(() => {
+    if (!emailed) postEmail();
+  }, [emailed]);
 
   const getSession = async () => {
     const checkoutId = window.location.href.split("?session_id=")[1];
@@ -65,6 +83,29 @@ export default function SuccessPage() {
       setTotalPrice(data.totalPrice);
       setShipping(data.shipping);
       setEmail(data.email);
+      setEmailed(data.emailed);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const postEmail = async () => {
+    const i = items.map((i) => `${i.quantity}x ${i.name}`);
+    const settings = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        url: window.location.href,
+        items: i,
+        email: email,
+      }),
+    };
+    try {
+      await fetch("/api/email", settings);
     } catch (err) {
       console.error(err);
     }
@@ -94,7 +135,11 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        <ShippingAddress shipping={shipping} email={email} />
+        <ShippingAddress
+          shipping={shipping}
+          email={email}
+          postEmail={postEmail}
+        />
       </div>
       <Link className="back" to="/">
         {"<BACK"}
