@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Image from "../image/Image";
+import Menu from "../menu/Menu";
 import nsjLogo from "../../assets/nsj.png";
 import "./Box.scss";
 
@@ -46,7 +47,7 @@ const createList = (items, hover) => {
     data.push(
       createListItem(
         "box__train__head",
-        2,
+        1,
         100,
         0,
         -300,
@@ -64,7 +65,7 @@ const createList = (items, hover) => {
         "box__train__item",
         null,
         null,
-        2,
+        1,
         h,
         items[n].src,
         items[n].src2,
@@ -79,7 +80,7 @@ const createList = (items, hover) => {
       "box__train__tail",
       null,
       null,
-      2,
+      1,
       h,
       hover || nsjLogo,
       null,
@@ -92,6 +93,7 @@ const createList = (items, hover) => {
 
 export default function Box({ products }) {
   const [scroll, setScroll] = useState(window.scrollY);
+  const [atTop, setAtTop] = useState(window.scrollY < 40)
   const hover = useSelector((state) => state.cart.hover);
   const data = createList(products, hover);
 
@@ -103,10 +105,12 @@ export default function Box({ products }) {
   }, []);
 
   const toggleScroll = () => {
-    setScroll(window.scrollY);
+    let scrollY = window.scrollY;
+    setScroll(scrollY);
+    setAtTop(scrollY < 40);
   };
 
-  const itemVar = [null, scroll, window.innerHeight / 2];
+  const itemVar = [null, window.innerHeight / 2];
 
   return (
     <div>
@@ -134,6 +138,7 @@ export default function Box({ products }) {
           })}
         </div>
       </div>
+      <Menu atTop={atTop} />
     </div>
   );
 }

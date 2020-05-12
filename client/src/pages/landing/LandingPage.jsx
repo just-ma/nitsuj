@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Grid from "../../components/grid/Grid";
 import Box from "../../components/box/Box";
-import Menu from "../../components/menu/Menu";
 import Loading from "../../components/loading/Loading";
 
 export default function LandingPage() {
@@ -32,7 +31,6 @@ export default function LandingPage() {
     <div>
       <Box products={products} />
       <Grid products={products} />
-      <Menu />
     </div>
   );
 }
