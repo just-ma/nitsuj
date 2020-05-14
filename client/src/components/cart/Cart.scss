@@ -1,8 +1,14 @@
+@import "../../styles/variables.scss";
+
 .cart {
   position: relative;
   margin-bottom: 400px;
   cursor: default;
   pointer-events: auto;
+
+  @media screen and (max-width: $max-width) {
+    overflow: hidden;
+  }
 
   &__topBorder {
     position: absolute;

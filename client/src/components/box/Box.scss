@@ -1,12 +1,18 @@
+@import "../../styles/variables.scss";
+
 .box {
   position: fixed;
   width: 300px;
   height: 300px;
   top: 50%;
   right: 50%;
-  background-color: #a7a3db;
   transform: translate(0, -50%);
   overflow: hidden;
+
+  @media screen and (max-width: $max-width) {
+    top: 10%;
+    transform: translate(50%, 0);
+  }
 
   &__train {
     position: absolute;

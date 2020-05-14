@@ -75,7 +75,9 @@ export default function GridItem({ name, price, src }) {
   return (
     <div className="gridItem">
       <div className="gridItem__left">
-        <WiggleText>{name}</WiggleText>
+        <span className="name">
+          <WiggleText>{name}</WiggleText>
+        </span>
         <span className="price">
           <WiggleText>{"$" + price}</WiggleText>
         </span>

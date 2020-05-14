@@ -1,9 +1,11 @@
+@import "./styles/variables.scss";
+
 body {
   font-family: 'Inconsolata', monospace;
   margin: 0;
 }
 
 html {
-  background-color: rgb(233, 233, 233);
+  background-color: $background-color;
   scroll-behavior: smooth;
 }
