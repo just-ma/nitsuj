@@ -9,11 +9,6 @@
   transform: translate(0, -50%);
   overflow: hidden;
 
-  @media screen and (max-width: $max-width) {
-    top: 10%;
-    transform: translate(50%, 0);
-  }
-
   &__train {
     position: absolute;
 
@@ -44,5 +39,17 @@
 
   &__content {
     position: absolute;
+  }
+
+  @media screen and (max-width: $max-width) {
+    top: 10%;
+    transform: translate(50%, 0);
+    
+    &__train {
+
+      &__tail {
+        display: none;
+      }
+    }
   }
 }

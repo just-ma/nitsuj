@@ -36,13 +36,13 @@ const Item = ({ id, name, price, bold, src, button }) => {
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      {name + " "}
-      <span>
+      <span>{name + " "}</span>
+      <span className="dots">
         {Array(35 - name.length - price.toString().length)
           .fill(".")
           .join("")}
       </span>
-      {" $" + price}
+      <span>{" $" + price}</span>
       {button && <RemoveButton id={id} />}
     </div>
   );
@@ -73,10 +73,9 @@ export default function Cart({ stripeToken }) {
     try {
       const res = await fetch("/api/checkout", settings);
       const data = await res.json();
-      stripe
-        .redirectToCheckout({
-          sessionId: data.session.id,
-        })
+      stripe.redirectToCheckout({
+        sessionId: data.session.id,
+      });
     } catch (err) {
       console.error(err);
     }
@@ -85,9 +84,7 @@ export default function Cart({ stripeToken }) {
   return (
     <div className="cart">
       <div className="cart__topBorder" id="cart">
-        <WiggleText>
-          ====================================================
-        </WiggleText>
+        <WiggleText>{Array(100).fill("- -").join("+")}</WiggleText>
       </div>
       <div className="cart__right">
         {items.map((i) => (

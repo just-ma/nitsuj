@@ -88,9 +88,9 @@ export default function Image({ primary, secondary, remainder, zoom }) {
       style={{ cursor: zoom ? "zoom-in" : "default" }}
     >
       {hover ? (
-        <img className="image -secondary" src={secondary} alt="primary" />
+        <img className="image -secondary" src={secondary} alt="secondary" />
       ) : (
-        <img className="image -primary" src={primary} alt="secondary" />
+        <img className="image -primary" src={primary} alt="primary" />
       )}
       {modal && <Modal setModal={setModal} images={images} />}
     </div>

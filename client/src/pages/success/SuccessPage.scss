@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .success {
   position: absolute;
   width: 500px;
@@ -72,5 +74,51 @@
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: $max-width) {
+  .success {
+    width: 80%;
+
+    &__header {
+      padding: 5px;
+      overflow: hidden;
+      height: 15px;
+      margin: 50px 0 0 0;
+    }
+
+    &__items {
+      margin-top: 90px;
+    }
+  }
+
+  .listItem {
+    flex-wrap: wrap;
+    align-items: flex-end;
+    height: 110px;
+
+    &__name {
+      width: calc(100% - 70px);
+      text-align: right;
+    }
+  }
+
+  .shipping {
+    flex-direction: column;
+
+    &__vertical {
+      display: none;
+    }
+
+    &__box {
+      width: 100%;
+    }
+  }
+
+  .back {
+    top: 20px;
+    left: 20px;
+    margin: 10px;
   }
 }

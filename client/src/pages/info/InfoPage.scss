@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .info {
 
   &__content {
@@ -6,7 +8,6 @@
     top: 100px;
     left: 50%;
     transform: translate(-50%, 0);
-    padding-bottom: 150px;
   }
 
   &__back {
@@ -19,6 +20,18 @@
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  @media screen and (max-width: $max-width) { 
+    &__content {
+      width: 80%;
+    }
+
+    &__back {
+      top: 20px;
+      left: 20px;
+      margin: 10px;
     }
   }
 }

@@ -8,4 +8,5 @@ body {
 html {
   background-color: $background-color;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
