@@ -91,9 +91,8 @@ const createList = (items, hover) => {
   return data;
 };
 
-export default function Box({ products }) {
+const BoxContent = ({ products, setAtTop, atTop }) => {
   const [scroll, setScroll] = useState(window.scrollY);
-  const [atTop, setAtTop] = useState(window.scrollY < 40)
   const hover = useSelector((state) => state.cart.hover);
   const data = createList(products, hover);
 
@@ -104,40 +103,51 @@ export default function Box({ products }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (atTop && scroll >= 40) {
+      setAtTop(false);
+    } else if (!atTop && scroll < 40) {
+      setAtTop(true);
+    }
+  }, [atTop, scroll]);
+
   const toggleScroll = () => {
     let scrollY = window.scrollY;
     setScroll(scrollY);
-    setAtTop(scrollY < 40);
   };
 
   const itemVar = [null, window.innerHeight / 2];
 
   return (
-    <div>
-      <div className="box">
-        <div className="box__train" style={{ top: -scroll }}>
-          {data.map((e, i) => {
-            let h = itemVar[e.height] + e.heightOffset;
-            let t = scroll - itemVar[e.top] + e.topOffset;
-            return (
-              <div
-                key={i}
-                className={e.className}
-                style={{ height: h || null }}
-              >
-                <div className="box__content" style={{ top: t }}>
-                  <Image
-                    primary={e.src}
-                    secondary={e.src2}
-                    remainder={e.src3}
-                    zoom={e.zoom}
-                  />
-                </div>
+    <div className="box">
+      <div className="box__train" style={{ top: -scroll }}>
+        {data.map((e, i) => {
+          let h = itemVar[e.height] + e.heightOffset;
+          let t = scroll - itemVar[e.top] + e.topOffset;
+          return (
+            <div key={i} className={e.className} style={{ height: h || null }}>
+              <div className="box__content" style={{ top: t }}>
+                <Image
+                  primary={e.src}
+                  secondary={e.src2}
+                  remainder={e.src3}
+                  zoom={e.zoom}
+                />
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
+    </div>
+  );
+};
+
+export default function Box({ products }) {
+  const [atTop, setAtTop] = useState(window.scrollY < 40);
+
+  return (
+    <div>
+      <BoxContent products={products} setAtTop={setAtTop} atTop={atTop} />
       <Menu atTop={atTop} />
     </div>
   );
