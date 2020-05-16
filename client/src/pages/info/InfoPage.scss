@@ -8,6 +8,7 @@
     top: 100px;
     left: 50%;
     transform: translate(-50%, 0);
+    margin-bottom: 30%;
   }
 
   &__back {
@@ -23,7 +24,7 @@
     }
   }
 
-  @media screen and (max-width: $max-width) { 
+  @media screen and (max-width: $max-width) {
     &__content {
       width: 80%;
     }
@@ -33,5 +34,43 @@
       left: 20px;
       margin: 10px;
     }
+  }
+}
+
+.section {
+  &__header {
+    cursor: pointer;
+  }
+
+  &__body {
+    height: auto;
+    max-height: 0px;
+    overflow: scroll;
+    transition: ease 0.5s;
+    font-size: 14px;
+
+    &.-expanded {
+      max-height: 400px;
+      //height: auto;
+    }
+  }
+}
+
+.arrow {
+  display: inline-block;
+  transition: ease 0.5s;
+  position: absolute;
+  left: -20px;
+
+  &.-down {
+    transform: rotate(-180deg);
+  }
+}
+
+table {
+  width: 100%;
+
+  td {
+    text-align: center;
   }
 }
