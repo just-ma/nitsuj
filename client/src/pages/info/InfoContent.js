@@ -1199,4 +1199,9 @@ export const infoContent = [
       </div>
     ),
   },
+  {
+    id: "contact",
+    title: "Contact",
+    body: null,
+  },
 ];

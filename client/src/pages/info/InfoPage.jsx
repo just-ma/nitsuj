@@ -3,6 +3,10 @@ import { infoContent } from "./InfoContent";
 import { Link } from "react-router-dom";
 import "./InfoPage.scss";
 
+const Contact = () => {
+  return <div>contact</div>;
+};
+
 const Arrow = ({ down }) => {
   return <span className={"arrow" + (down ? " -down" : "")}>^</span>;
 };
@@ -21,14 +25,20 @@ const Section = ({ id, title, body, loc }) => {
         {title}
       </h3>
       <div className={"section__body" + (expanded ? " -expanded" : "")}>
-        {body}
+        {id === "contact" ? <Contact /> : body}
       </div>
     </div>
   );
 };
 
 export default function InfoPage() {
-  const loc = window.location.href.split("#")[1];
+  const locArr = window.location.href.split("#");
+  let loc = "";
+  if (locArr.length > 1) {
+    loc = locArr[1];
+  } else {
+    window.scrollTo(0, 0);
+  }
 
   return (
     <div className="info">
