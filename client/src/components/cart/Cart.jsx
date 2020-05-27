@@ -100,7 +100,7 @@ export default function Cart({ stripeToken }) {
         <div className="cart__break" />
         <Item bold name={"SUBTOTAL"} price={totalPrice.toString()} />
         <button
-          className={"cart__checkout"}
+          className="cart__checkout"
           onClick={checkout}
           disabled={items.length === 0}
         >
