@@ -130,4 +130,13 @@ table {
 			border: solid grey 2px;
 		}
 	}
+	&__confirmation {
+		position: absolute;
+		width: 200px;
+		height: 40px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px;
+	}
 }

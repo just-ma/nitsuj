@@ -183,4 +183,35 @@ Justin`;
   }
 });
 
+router.post("/api/contact", async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const body = req.body.body;
+
+  const generateEmail = () => {
+    return `Name: ${name} \nEmail: ${email} \nBody: ${body}`;
+  };
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nit.su.j.apparel@gmail.com",
+      pass: config.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: "nit.su.j.apparel@gmail.com",
+    to: "nit.su.j.apparel@gmail.com",
+    subject: "Customer message",
+    text: generateEmail(),
+  };
+
+  try {
+    transporter.sendMail(mailOptions);
+  } catch (err) {
+    return res.status(500).send("an error occurred");
+  }
+});
+
 module.exports = router;
