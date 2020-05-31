@@ -2,17 +2,21 @@ import React, { useState, useEffect } from "react";
 import { infoContent } from "./InfoContent";
 import { Link } from "react-router-dom";
 import "./InfoPage.scss";
+import axios from "axios";
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const display = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(body);
+    axios.post(('/api/contact'), { name: name, email: email, body: body })
+      .catch((error) => {
+        console.error(error);
+      });
+    setSubmitted(true);
   };
 
   const onChangeName = (e) => {
@@ -55,12 +59,19 @@ const Contact = () => {
         id="text"
         name="text">
       </textarea>
-      <button
+      {!submitted && (
+        <button
         className="contact__submit"
-        onClick={display}
+        onClick={sendEmail}
         disabled={body === ""}>
         Submit
       </button>
+        )}
+      {submitted && (
+        <div className="contact__confirmation">
+        <span>Submitted!</span>
+      </div>
+      )}
     </form>
   );
 };
