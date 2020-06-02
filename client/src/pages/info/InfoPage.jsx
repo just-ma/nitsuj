@@ -10,7 +10,7 @@ const Contact = () => {
   const [body, setBody] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const sendEmail = async (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
     axios
       .post("/api/contact", { name: name, email: email, body: body })
@@ -54,7 +54,9 @@ const Contact = () => {
         onChange={onChangeBody}
         value={body}
       ></textarea>
-      <div className={"contact__submitWrapper" + (submitted ? "" : " -maximize")}>
+      <div
+        className={"contact__submitWrapper" + (submitted ? "" : " -maximize")}
+      >
         <button
           className="contact__submit"
           onClick={sendEmail}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
+import axios from "axios";
 import "./Cart.scss";
 
 const RemoveButton = ({ id }) => {
@@ -61,24 +62,18 @@ export default function Cart({ stripeToken }) {
 
   const totalPrice = items.reduce((t, i) => t + i.price, 0);
 
-  const checkout = async () => {
-    const settings = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(items),
-    };
-    try {
-      const res = await fetch("/api/checkout", settings);
-      const data = await res.json();
-      stripe.redirectToCheckout({
-        sessionId: data.session.id,
+  const checkout = () => {
+    axios
+      .post("/api/checkout", items)
+      .then((res) => {
+        const data = res.data;
+        stripe.redirectToCheckout({
+          sessionId: data.session.id,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   return (

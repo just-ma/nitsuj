@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import WiggleText from "../../components/wiggleText/WiggleText";
 import Loading from "../../components/loading/Loading";
+import axios from "axios";
 import "./SuccessPage.scss";
 
 const ListItem = ({ name, price, quantity, src }) => {
@@ -65,50 +66,36 @@ export default function SuccessPage() {
     if (!emailed) postEmail();
   }, [emailed]);
 
-  const getSession = async () => {
+  const getSession = () => {
     const checkoutId = window.location.href.split("?session_id=")[1];
-    const settings = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ checkoutId: checkoutId }),
-    };
-    try {
-      const res = await fetch("/api/session", settings);
-      const data = await res.json();
-      setName(data.name);
-      setItems(data.items);
-      setTotalPrice(data.totalPrice);
-      setShipping(data.shipping);
-      setEmail(data.email);
-      setEmailed(data.emailed);
-    } catch (err) {
-      console.error(err);
-    }
+    axios
+      .post("/api/session", { checkoutId: checkoutId })
+      .then((res) => {
+        const data = res.data;
+        setName(data.name);
+        setItems(data.items);
+        setTotalPrice(data.totalPrice);
+        setShipping(data.shipping);
+        setEmail(data.email);
+        setEmailed(data.emailed);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  const postEmail = async () => {
+  const postEmail = () => {
     const i = items.map((i) => `${i.quantity}x ${i.name}`);
-    const settings = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    axios
+      .post("/api/email", {
         name: name,
         url: window.location.href,
         items: i,
         email: email,
-      }),
-    };
-    try {
-      await fetch("/api/email", settings);
-    } catch (err) {
-      console.error(err);
-    }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return items.length === 0 ? (
