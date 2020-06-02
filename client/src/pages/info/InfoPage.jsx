@@ -12,7 +12,8 @@ const Contact = () => {
 
   const sendEmail = async (e) => {
     e.preventDefault();
-    axios.post(('/api/contact'), { name: name, email: email, body: body })
+    axios
+      .post("/api/contact", { name: name, email: email, body: body })
       .catch((error) => {
         console.error(error);
       });
@@ -21,15 +22,15 @@ const Contact = () => {
 
   const onChangeName = (e) => {
     setName(e.target.value);
-  }
+  };
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
   const onChangeBody = (e) => {
     setBody(e.target.value);
-  }
+  };
 
   return (
     <form className="contact">
@@ -39,38 +40,33 @@ const Contact = () => {
         onChange={onChangeName}
         value={name}
         type="text"
-        id="name"
-        name="name">
-      </input>
+      ></input>
       <input
         placeholder="Email"
         className="contact__input"
         onChange={onChangeEmail}
         value={email}
         type="text"
-        id="email"
-        name="email">
-      </input>
+      ></input>
       <textarea
         placeholder="Message"
         className="contact__body"
         onChange={onChangeBody}
         value={body}
-        id="text"
-        name="text">
-      </textarea>
-      {!submitted && (
+      ></textarea>
+      <div className={"contact__submitWrapper" + (submitted ? "" : " -maximize")}>
         <button
-        className="contact__submit"
-        onClick={sendEmail}
-        disabled={body === ""}>
-        Submit
-      </button>
-        )}
+          className="contact__submit"
+          onClick={sendEmail}
+          disabled={body === ""}
+        >
+          Submit
+        </button>
+      </div>
       {submitted && (
         <div className="contact__confirmation">
-        <span>Submitted!</span>
-      </div>
+          <span>Submitted!</span>
+        </div>
       )}
     </form>
   );
