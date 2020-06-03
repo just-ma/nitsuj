@@ -24,37 +24,37 @@ export const infoContent = [
         <p>
           Shirts are printed on demand. Printing takes 2-7 business days, and
           shipping speeds are the following:
-          <ul>
-            <li>USA: 3-5 business days</li>
-            <li>Canada: 5-10 business days</li>
-            <li>International: 10-20 business days</li>
-          </ul>
         </p>
+        <ul>
+          <li>USA: 3-5 business days</li>
+          <li>Canada: 5-10 business days</li>
+          <li>International: 10-20 business days</li>
+        </ul>
         <br />
         <b>What shirt do you print on?</b>
-        <p>
-          I use a Men's Champion T-Shirt.
-          <ul>
-            <li>100% cotton</li>
-            <li>Oxford Gray Heather is 90% cotton, 10% polyester</li>
-            <li>Fabric weight: 7 oz/yd² (237.34 g/m²)</li>
-            <li>1" bound ribbed crew neck</li>
-            <li>Relaxed, oversized fit</li>
-            <li>Deep armholes for ease and mobility</li>
-            <li>Double-needle stitching on sleeves and bottom hem</li>
-            <li>Champion “C” logo patch on the left sleeve</li>
-          </ul>
-        </p>{" "}
+        <p>I use a Men's Champion T-Shirt.</p>
+        <ul>
+          <li>100% cotton</li>
+          <li>Oxford Gray Heather is 90% cotton, 10% polyester</li>
+          <li>Fabric weight: 7 oz/yd² (237.34 g/m²)</li>
+          <li>1" bound ribbed crew neck</li>
+          <li>Relaxed, oversized fit</li>
+          <li>Deep armholes for ease and mobility</li>
+          <li>Double-needle stitching on sleeves and bottom hem</li>
+          <li>Champion “C” logo patch on the left sleeve</li>
+        </ul>
         <br />
         <b>What are the shirt dimensions? (inches)</b>
-        <p>
-          <table>
+        <table>
+          <thead>
             <tr>
               <th>Size</th>
               <th>Length</th>
               <th>Chest</th>
               <th>Sleeve Length</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>S</td>
               <td>26</td>
@@ -79,27 +79,27 @@ export const infoContent = [
               <td>46 – 48</td>
               <td>22</td>
             </tr>
-          </table>
-          Product measurements may vary by up to 2".
-          <ul>
-            <li>
-              <i>Length</i> - Place the end of the tape beside the collar at the
-              top of the tee (Highest Point Shoulder). Pull the tape measure to
-              the bottom of the shirt.
-            </li>
-            <li>
-              <i>Chest</i> - Measure yourself around the fullest part of your
-              chest. Keep the tape measure horizontal.
-            </li>
-            <li>
-              <i>Sleeve Length</i> - Place the end of the tape at the center
-              back of the collar, then pull the tape measure along the top seam
-              of the sleeve. When you get to the shoulder hold the tape in place
-              at the shoulder and continue to pull down the sleeve until you
-              reach the hem of the sleeve.
-            </li>
-          </ul>
-        </p>
+          </tbody>
+        </table>
+        Product measurements may vary by up to 2".
+        <ul>
+          <li>
+            <i>Length</i> - Place the end of the tape beside the collar at the
+            top of the tee (Highest Point Shoulder). Pull the tape measure to
+            the bottom of the shirt.
+          </li>
+          <li>
+            <i>Chest</i> - Measure yourself around the fullest part of your
+            chest. Keep the tape measure horizontal.
+          </li>
+          <li>
+            <i>Sleeve Length</i> - Place the end of the tape at the center back
+            of the collar, then pull the tape measure along the top seam of the
+            sleeve. When you get to the shoulder hold the tape in place at the
+            shoulder and continue to pull down the sleeve until you reach the
+            hem of the sleeve.
+          </li>
+        </ul>
         <br />
         <b>How do I return an order?</b>
         <p>
@@ -505,7 +505,7 @@ export const infoContent = [
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>AGREEMENT TO TERMS</p>
-        <p class="p4">
+        <p>
           These Terms of Use constitute a legally binding agreement made between
           you, whether personally or on behalf of an entity (&ldquo;you&rdquo;)
           and&nbsp;NIT SU J.&nbsp;("<strong>Company</strong>", &ldquo;
@@ -513,7 +513,7 @@ export const infoContent = [
           &ldquo;<strong>our</strong>&rdquo;), concerning your access to and use
           of the&nbsp;
           <a href="[TEMP_WEBSITE]">
-            <span class="s1">[TEMP_WEBSITE]</span>
+            <span>[TEMP_WEBSITE]</span>
           </a>
           &nbsp;website as well as any other media form, media channel, mobile
           website or mobile application related, linked, or otherwise connected
@@ -523,7 +523,7 @@ export const infoContent = [
           TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE
           AND YOU MUST DISCONTINUE USE IMMEDIATELY.
         </p>
-        <p class="p4">
+        <p>
           Supplemental terms and conditions or documents that may be posted on
           the Site from time to time are hereby expressly incorporated herein by
           reference. We reserve the right, in our sole discretion, to make
@@ -537,7 +537,7 @@ export const infoContent = [
           revised Terms of Use by your continued use of the Site after the date
           such revised Terms of Use are posted.
         </p>
-        <p class="p4">
+        <p>
           The information provided on the Site is not intended for distribution
           to or use by any person or entity in any jurisdiction or country where
           such distribution or use would be contrary to law or regulation or
@@ -547,7 +547,7 @@ export const infoContent = [
           are solely responsible for compliance with local laws, if and to the
           extent local laws are applicable.
         </p>
-        <p class="p4">
+        <p>
           The Site is intended for users who are at least 13 years of age. All
           users who are minors in the jurisdiction in which they reside
           (generally under the age of 18) must have the permission of, and be
@@ -555,9 +555,9 @@ export const infoContent = [
           you are a minor, you must have your parent or guardian read and agree
           to these Terms of Use prior to you using the Site.
         </p>
-        <p class="p4">&nbsp;</p>
+        <p>&nbsp;</p>
         <p>INTELLECTUAL PROPERTY RIGHTS</p>
-        <p class="p4">
+        <p>
           Unless otherwise indicated, the Site is our proprietary property and
           all source code, databases, functionality, software, website designs,
           audio, video, text, photographs, and graphics on the Site
@@ -575,7 +575,7 @@ export const infoContent = [
           otherwise exploited for any commercial purpose whatsoever, without our
           express prior written permission.
         </p>
-        <p class="p4">
+        <p>
           Provided that you are eligible to use the Site, you are granted a
           limited license to access and use the Site and to download or print a
           copy of any portion of the Content to which you have properly gained
@@ -583,7 +583,7 @@ export const infoContent = [
           rights not expressly granted to you in and to the Site, the Content
           and the Marks.
         </p>
-        <p class="p3">&nbsp;</p>
+        <p>&nbsp;</p>
         <p>USER REPRESENTATIONS&nbsp;</p>
         <p>
           By using the Site, you represent and warrant that:&nbsp;(1) you have

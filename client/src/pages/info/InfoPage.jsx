@@ -111,7 +111,7 @@ export default function InfoPage() {
     <div className="info">
       <div className="info__content">
         {infoContent.map((i) => (
-          <Section loc={loc} id={i.id} title={i.title} body={i.body} />
+          <Section key={i.id} loc={loc} id={i.id} title={i.title} body={i.body} />
         ))}
       </div>
       <Link className="info__back" to="/">
