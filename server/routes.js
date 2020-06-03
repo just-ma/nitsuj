@@ -92,7 +92,7 @@ router.post("/api/session", async (req, res) => {
       name: i.custom.name,
       price: (i.quantity * i.amount) / 100,
       quantity: i.quantity,
-      src: i.custom.images[0],
+      src: i.custom.images ? i.custom.images[0] : null,
     }));
     totalPrice = items.reduce((t, i) => i.price + t, 0);
     name = session.shipping.name;

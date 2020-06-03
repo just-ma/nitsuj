@@ -61,7 +61,7 @@
   &__removeButton {
     position: absolute;
     top: 5px;
-    right: 20px;
+    right: 60px;
     border: solid black 2px;
     font-size: 15px;
     font-family: "Inconsolata", monospace;
@@ -91,11 +91,7 @@
     }
 
     &__removeButton {
-      right: -30px;
+      right: 0px;
     }
-  }
-
-  .dots {
-    display: none;
   }
 }

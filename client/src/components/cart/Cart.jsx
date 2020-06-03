@@ -4,6 +4,8 @@ import WiggleText from "../wiggleText/WiggleText";
 import axios from "axios";
 import "./Cart.scss";
 
+const shippingCost = 5;
+
 const RemoveButton = ({ id }) => {
   const dispatch = useDispatch();
 
@@ -37,13 +39,7 @@ const Item = ({ id, name, price, bold, src, button }) => {
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <span>{name + " "}</span>
-      <span className="dots">
-        {Array(35 - name.length - price.toString().length)
-          .fill(".")
-          .join("")}
-      </span>
-      <span>{" $" + price}</span>
+      <span>{`${name}  $${price}`}</span>
       {button && <RemoveButton id={id} />}
     </div>
   );
@@ -58,11 +54,17 @@ export default function Cart({ stripeToken }) {
     }
   }, [stripeToken]);
 
-  const items = useSelector((state) => state.cart.items);
-
-  const totalPrice = items.reduce((t, i) => t + i.price, 0);
+  let items = useSelector((state) => state.cart.items);
+  let totalPrice = items.reduce((t, i) => t + i.price, shippingCost);
 
   const checkout = () => {
+    if (shippingCost) {
+      items.push({
+        id: -1,
+        name: "Shipping",
+        price: shippingCost
+      });
+    }
     axios
       .post("/api/checkout", items)
       .then((res) => {
@@ -93,7 +95,10 @@ export default function Cart({ stripeToken }) {
           />
         ))}
         <div className="cart__break" />
-        <Item bold name={"SUBTOTAL"} price={totalPrice.toString()} />
+        {shippingCost && (
+          <Item bold name={"SHIPPING"} price={shippingCost.toString()} />
+        )}
+        <Item bold name={"TOTAL"} price={totalPrice.toString()} />
         <button
           className="cart__checkout"
           onClick={checkout}

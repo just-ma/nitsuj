@@ -2,13 +2,41 @@ import React from "react";
 
 // TODO: replace [TEMP_WEBSITE] with actual website
 
+const nitsujLinks = [
+  { name: "@nit.su.j", url: "https://www.instagram.com/nit.su.j/" },
+  {
+    name: "github repo",
+    url: "https://github.com/just-ma/nitsuj/",
+  },
+];
+const personalLinks = [
+  { name: "@_justma", url: "https://www.instagram.com/_justma/" },
+  { name: "majust.in", url: "https://majust.in/" },
+];
+
 export const infoContent = [
   {
     id: "about",
     title: "About",
     body: (
       <div>
-        <p>My name is Justin</p>
+        <p>My name is Justin and I make shirts and websites:)</p>
+        <br />
+        {nitsujLinks.map((e) => (
+          <p>
+            <a href={e.url} target="_blank">
+              {e.name}
+            </a>
+          </p>
+        ))}
+        <br />
+        {personalLinks.map((e) => (
+          <p>
+            <a href={e.url} target="_blank">
+              {e.name}
+            </a>
+          </p>
+        ))}
       </div>
     ),
   },

@@ -7,11 +7,16 @@ import axios from "axios";
 import "./SuccessPage.scss";
 
 const ListItem = ({ name, price, quantity, src }) => {
-  return (
+  return src ? (
     <div className="listItem">
       <img className="listItem__image" src={src} alt="thumbnail" />
       <span className="listItem__name">{name}</span>
       <span>{"Qty " + quantity}</span>
+      <span>{"$" + price}</span>
+    </div>
+  ) : (
+    <div className="listItem">
+      <span className="listItem__shipping">{name}</span>
       <span>{"$" + price}</span>
     </div>
   );
@@ -85,7 +90,10 @@ export default function SuccessPage() {
   };
 
   const postEmail = () => {
-    const i = items.map((i) => `${i.quantity}x ${i.name}`);
+    let i = items
+      .filter((i) => i.src)
+      .map((i) => `${i.quantity}x ${i.name}`);
+
     axios
       .post("/api/email", {
         name: name,
