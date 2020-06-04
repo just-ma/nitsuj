@@ -30,8 +30,11 @@
     position: fixed;
     top: 60px;
     left: 100px;
-    text-decoration: underline;
     color: white;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
