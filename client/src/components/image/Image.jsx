@@ -81,11 +81,10 @@ export default function Image({ primary, secondary, remainder, zoom }) {
 
   return (
     <div
-      className="wrapper"
+      className={"wrapper" + (zoom ? " -zoom" : "")}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onClick}
-      style={{ cursor: zoom ? "zoom-in" : "default" }}
     >
       {hover ? (
         <img className="image -secondary" src={secondary} alt="secondary" />

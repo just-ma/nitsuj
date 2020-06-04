@@ -1,5 +1,13 @@
 @import "../../styles/variables.scss";
 
+.wrapper {
+  cursor: $cursor-default;
+
+  &.-zoom {
+    cursor: $cursor-zoom;
+  }
+}
+
 .image {
   width: 300px;
   height: 300px;
@@ -24,7 +32,6 @@
     left: 100px;
     text-decoration: underline;
     color: white;
-    cursor: pointer;
   }
 }
 

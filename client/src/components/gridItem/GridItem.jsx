@@ -12,8 +12,13 @@ const SizeBox = ({ name, price, src }) => {
   const buttons = ["S", "M", "L", "XL"];
 
   const onSelectSize = (title) => {
-    setSize(title);
-    setAddClasses("-selected");
+    if (size === title) {
+      setSize(null);
+      setAddClasses(null);
+    } else {
+      setSize(title);
+      setAddClasses("-selected");
+    }
     setAdded(false);
   };
 

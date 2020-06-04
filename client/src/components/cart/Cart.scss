@@ -3,7 +3,7 @@
 .cart {
   position: relative;
   margin-bottom: 400px;
-  cursor: default;
+  cursor: $cursor-default;
   pointer-events: auto;
 
   &__topBorder {

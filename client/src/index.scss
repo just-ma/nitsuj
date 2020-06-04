@@ -10,4 +10,22 @@ html {
   background-color: $background-color;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  cursor: $cursor-default-index;
+}
+
+button {
+  cursor: $cursor-default-index;
+}
+
+a {
+  cursor: $cursor-default-index;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+input, textarea {
+  cursor: $cursor-text-index;
 }

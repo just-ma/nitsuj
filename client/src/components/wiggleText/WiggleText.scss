@@ -1,6 +1,8 @@
+@import "../../styles/variables.scss";
+
 .charContainer {
   position: relative;
-  cursor: default;
+  cursor: $cursor-default;
 
   .char {
     position: absolute;
