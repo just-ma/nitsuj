@@ -66,7 +66,7 @@ export default function Cart({ stripeToken }) {
       });
     }
     axios
-      .post("/api/checkout", items)
+      .post("/.netlify/functions/app/api/checkout", items)
       .then((res) => {
         const data = res.data;
         stripe.redirectToCheckout({

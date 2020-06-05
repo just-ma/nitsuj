@@ -18,7 +18,7 @@ export default function LandingPage() {
 
   const getProducts = () => {
     axios
-      .get("/api/products")
+      .get("/.netlify/functions/app/api/products")
       .then((res) => {
         const data = res.data;
         setProducts(data.products);

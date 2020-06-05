@@ -13,7 +13,7 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     axios
-      .post("/api/contact", { name: name, email: email, body: body })
+      .post("/.netlify/functions/app/api/contact", { name: name, email: email, body: body })
       .catch((error) => {
         console.error(error);
       });

@@ -1,0 +1,21 @@
+{
+  "name": "nitsuj-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "run-p start:**",
+    "start:lambda": "netlify-lambda serve server",
+    "start:app": "cd client && yarn start",
+    "build": "run-p build:**",
+    "build:lambda": "netlify-lambda build server",
+    "build:app": "cd client && yarn build",
+    "deploy:draft": "netlify deploy --dir=client/build --functions=functions",
+    "deploy:prod": "netlify deploy --dir=client/build --functions=functions --prod"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "netlify-lambda": "^1.6.3",
+    "nodemailer": "^6.4.6",
+    "serverless-http": "^2.5.0",
+    "stripe": "^8.44.0"
+  }
+}

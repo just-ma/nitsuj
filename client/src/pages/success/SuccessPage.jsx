@@ -74,7 +74,7 @@ export default function SuccessPage() {
   const getSession = () => {
     const checkoutId = window.location.href.split("?session_id=")[1];
     axios
-      .post("/api/session", { checkoutId: checkoutId })
+      .post("/.netlify/functions/app/api/session", { checkoutId: checkoutId })
       .then((res) => {
         const data = res.data;
         setName(data.name);
@@ -95,7 +95,7 @@ export default function SuccessPage() {
       .map((i) => `${i.quantity}x ${i.name}`);
 
     axios
-      .post("/api/email", {
+      .post("/.netlify/functions/app/api/email", {
         name: name,
         url: window.location.href,
         items: i,
