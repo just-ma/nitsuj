@@ -12,17 +12,20 @@ router.get("/api/products", async (req, res) => {
 
     let prodMap = {};
     products.data.forEach((product) => {
-      prodMap[product.id] = {
-        name: product.name,
-        price: 0,
-        src: null,
-        src2: null,
-        src3: [],
-      };
+      if (product.active) {
+        prodMap[product.id] = {
+          name: product.name,
+          price: 0,
+          src: null,
+          src2: null,
+          src3: [],
+        };
+      }
     });
 
     skus.data.forEach((sku) => {
       let p = sku.product;
+      if (!prodMap[p]) return;
       let size = sku.attributes.name;
       switch (size) {
         case "S":
@@ -162,7 +165,9 @@ Justin`;
   };
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: "nit.su.j.apparel@gmail.com",
       pass: config.EMAIL_PASSWORD,
@@ -193,7 +198,9 @@ router.post("/api/contact", async (req, res) => {
   };
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: "nit.su.j.apparel@gmail.com",
       pass: config.EMAIL_PASSWORD,
