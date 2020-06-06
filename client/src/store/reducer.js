@@ -1,11 +1,8 @@
 import { createStore, combineReducers } from "redux";
 
-const cachedItems = localStorage.getItem("nitsuj_apparel_shopping_cart");
-const cachedCount = localStorage.getItem("nitsuj_apparel_cart_count");
-
 const cartState = {
-  items: cachedItems ? JSON.parse(cachedItems) : [],
-  count: cachedCount || 0,
+  items: [],
+  count: 0,
   hover: null,
 };
 
@@ -18,6 +15,17 @@ const cartReducer = (state = cartState, action) => {
   let newItems;
   let newCount;
   switch (action.type) {
+    case "INITIALIZE":
+      const cachedItems = localStorage.getItem("nitsuj_apparel_shopping_cart");
+      const cachedCount = localStorage.getItem("nitsuj_apparel_cart_count");
+      newCount = cachedCount || 0;
+      newItems = cachedItems ? JSON.parse(cachedItems) : [];
+      setLocalStorage(newItems, newCount);
+      return {
+        ...state,
+        items: newItems,
+        count: newCount,
+      };
     case "ADD":
       newCount = state.count + 1;
       newItems = [

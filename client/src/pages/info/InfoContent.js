@@ -1,4 +1,5 @@
 import React from "react";
+import { WEBSITE_URL } from "../../constants";
 
 const nitsujLinks = [
   { name: "@nit.su.j", url: "https://www.instagram.com/nit.su.j/" },
@@ -217,8 +218,7 @@ export const infoContent = [
         <b>Privacy Policy</b>
         <p>LAST UPDATED: May 15, 2020</p>
         <p>
-          NIT SU J. ("us", "we", or "our") operates the https://www.nitsujapparel.com website
-          (the "Service").
+          {`NIT SU J. ("us", "we", or "our") operates the ${WEBSITE_URL} website (the "Service").`}
           <br />
         </p>
         <p>
@@ -232,7 +232,7 @@ export const infoContent = [
           accordance with this policy. Unless otherwise defined in this Privacy
           Policy, terms used in this Privacy Policy have the same meanings as in
           our Terms and Conditions, accessible from{" "}
-          <a href="https://www.nitsujapparel.com">https://www.nitsujapparel.com</a>
+          <a href={WEBSITE_URL}>{WEBSITE_URL}</a>
         </p>
         <p>
           SECTION 1 - INFORMATION COLLECTION AND USE
@@ -514,7 +514,7 @@ export const infoContent = [
           </li>
           <li>
             <p>
-              By visiting this page on our website: https://www.nitsujapparel.com/info#contact
+              {`By visiting this page on our website: ${WEBSITE_URL}/info#contact`}
             </p>
           </li>
         </ul>
@@ -538,8 +538,8 @@ export const infoContent = [
           <strong>we</strong>&rdquo;, &ldquo;<strong>us</strong>&rdquo;, or
           &ldquo;<strong>our</strong>&rdquo;), concerning your access to and use
           of the&nbsp;
-          <a href="https://www.nitsujapparel.com">
-            <span>https://www.nitsujapparel.com</span>
+          <a href={WEBSITE_URL}>
+            <span>{WEBSITE_URL}</span>
           </a>
           &nbsp;website as well as any other media form, media channel, mobile
           website or mobile application related, linked, or otherwise connected
@@ -1016,8 +1016,8 @@ export const infoContent = [
         <p>
           We care about data privacy and security. Please review our Privacy
           Policy:&nbsp;
-          <a href="https://www.nitsujapparel.com/info#privacy_policy">
-            https://www.nitsujapparel.com/info#privacy_policy
+          <a href={WEBSITE_URL + "/info#privacy_policy"}>
+            {`${WEBSITE_URL}/info#privacy_policy`}
           </a>
           . By using the Site or the Marketplace Offerings, you agree to be
           bound by our Privacy Policy, which is incorporated into these Terms of

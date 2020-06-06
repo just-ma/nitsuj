@@ -1,4 +1,5 @@
 module.exports = Object.freeze({
+  WEBSITE_URL: "https://nitsuj.netlify.app",
   COUNTRIES: [
     "US",
     "CA",

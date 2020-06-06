@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { infoContent } from "./InfoContent";
 import { Link } from "react-router-dom";
 import "./InfoPage.scss";
+import { API_PATH } from "../../constants";
 import axios from "axios";
 
 const Contact = () => {
@@ -13,7 +14,7 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     axios
-      .post("/.netlify/functions/app/api/contact", { name: name, email: email, body: body })
+      .post(`${API_PATH}/contact`, { name: name, email: email, body: body })
       .catch((error) => {
         console.error(error);
       });
@@ -111,7 +112,13 @@ export default function InfoPage() {
     <div className="info">
       <div className="info__content">
         {infoContent.map((i) => (
-          <Section key={i.id} loc={loc} id={i.id} title={i.title} body={i.body} />
+          <Section
+            key={i.id}
+            loc={loc}
+            id={i.id}
+            title={i.title}
+            body={i.body}
+          />
         ))}
       </div>
       <Link className="info__back" to="/">

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import WiggleText from "../../components/wiggleText/WiggleText";
 import Loading from "../../components/loading/Loading";
 import axios from "axios";
+import { API_PATH } from "../../constants";
 import "./SuccessPage.scss";
 
 const ListItem = ({ name, price, quantity, src }) => {
@@ -74,7 +75,7 @@ export default function SuccessPage() {
   const getSession = () => {
     const checkoutId = window.location.href.split("?session_id=")[1];
     axios
-      .post("/.netlify/functions/app/api/session", { checkoutId: checkoutId })
+      .post(`${API_PATH}/session`, { checkoutId: checkoutId })
       .then((res) => {
         const data = res.data;
         setName(data.name);
@@ -90,12 +91,10 @@ export default function SuccessPage() {
   };
 
   const postEmail = () => {
-    let i = items
-      .filter((i) => i.src)
-      .map((i) => `${i.quantity}x ${i.name}`);
+    let i = items.filter((i) => i.src).map((i) => `${i.quantity}x ${i.name}`);
 
     axios
-      .post("/.netlify/functions/app/api/email", {
+      .post(`${API_PATH}/email`, {
         name: name,
         url: window.location.href,
         items: i,

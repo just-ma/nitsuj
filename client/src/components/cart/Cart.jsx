@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import WiggleText from "../wiggleText/WiggleText";
 import axios from "axios";
+import { API_PATH } from "../../constants";
 import "./Cart.scss";
 
 const shippingCost = 5;
@@ -62,11 +63,11 @@ export default function Cart({ stripeToken }) {
       items.push({
         id: -1,
         name: "Shipping",
-        price: shippingCost
+        price: shippingCost,
       });
     }
     axios
-      .post("/.netlify/functions/app/api/checkout", items)
+      .post(`${API_PATH}/checkout`, items)
       .then((res) => {
         const data = res.data;
         stripe.redirectToCheckout({
