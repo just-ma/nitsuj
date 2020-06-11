@@ -31,7 +31,7 @@ const Modal = ({ setModal, images }) => {
   useEffect(() => {
     const parent = document.querySelector("#root");
     parent.appendChild(rootRef.current);
-    return function removeEl() {
+    return () => {
       rootRef.current.remove();
     };
   }, []);

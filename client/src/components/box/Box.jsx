@@ -5,90 +5,49 @@ import Menu from "../menu/Menu";
 import nsjLogo from "../../assets/nsj.png";
 import "./Box.scss";
 
-const createListItem = (
-  className,
-  height,
-  heightOffset,
-  top,
-  topOffset,
-  src,
-  src2,
-  src3,
-  zoom
-) => {
-  return {
-    className: className,
-    height: height,
-    heightOffset: heightOffset,
-    top: top,
-    topOffset: topOffset,
-    src: src,
-    src2: src2,
-    src3: src3,
-    zoom: zoom,
+const createListItem = (item, index, length, hover) => {
+  let i = {
+    className: "box__train__",
+    top: 0,
+    topOffset: null,
+    src3: [],
+    zoom: false,
   };
+  let h = 100 - 500 * index;
+  if (index < 0) {
+    i.className += "main";
+    i.src = nsjLogo;
+  } else if (index === length) {
+    i.className += "tail";
+    i.top = 1;
+    i.topOffset = h;
+    i.src = hover || nsjLogo;
+  } else {
+    i.src = item.src;
+    i.src2 = item.src2;
+    i.src3 = item.src3;
+    i.zoom = true;
+    if (index === 0) {
+      i.className += "head";
+      i.height = 1;
+      i.heightOffset = 100;
+      i.topOffset = -300;
+    } else {
+      i.className += "item";
+      i.top = 1;
+      i.topOffset = h;
+    }
+  }
+  return i;
 };
 
 const createList = (items, hover) => {
-  let data = [
-    createListItem(
-      "box__train__main",
-      null,
-      null,
-      0,
-      null,
-      nsjLogo,
-      null,
-      [],
-      false
-    ),
-  ];
-  if (items.length > 0) {
-    data.push(
-      createListItem(
-        "box__train__head",
-        1,
-        100,
-        0,
-        -300,
-        items[0].src,
-        items[0].src2,
-        items[0].src3,
-        true
-      )
-    );
+  let list = [];
+  let len = items.length;
+  for (let i = -1; i <= len; i++) {
+    list.push(createListItem(items[i], i, len, hover));
   }
-  for (let n = 1; n < items.length; n++) {
-    let h = 100 - 500 * n;
-    data.push(
-      createListItem(
-        "box__train__item",
-        null,
-        null,
-        1,
-        h,
-        items[n].src,
-        items[n].src2,
-        items[n].src3,
-        true
-      )
-    );
-  }
-  let h = 100 - 500 * items.length;
-  data.push(
-    createListItem(
-      "box__train__tail",
-      null,
-      null,
-      1,
-      h,
-      hover || nsjLogo,
-      null,
-      [],
-      false
-    )
-  );
-  return data;
+  return list;
 };
 
 const BoxContent = ({ products, setAtTop, atTop }) => {
@@ -98,7 +57,7 @@ const BoxContent = ({ products, setAtTop, atTop }) => {
 
   useEffect(() => {
     document.addEventListener("scroll", toggleScroll);
-    return function removeListener() {
+    return () => {
       document.removeEventListener("scroll", toggleScroll);
     };
   }, []);
@@ -125,7 +84,7 @@ const BoxContent = ({ products, setAtTop, atTop }) => {
           let h = itemVar[e.height] + e.heightOffset;
           let t = scroll - itemVar[e.top] + e.topOffset;
           return (
-            <div key={i} className={e.className} style={{ height: h || null }}>
+            <div key={i} className={e.className} style={{ height: h }}>
               <div className="box__content" style={{ top: t }}>
                 <Image
                   primary={e.src}
