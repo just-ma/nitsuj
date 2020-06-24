@@ -220,4 +220,34 @@ router.post("/api/contact", async (req, res) => {
   }
 });
 
+router.post("/api/create", async (req, res) => {
+  const sizes = ["S", "M", "L", "XL"];
+  const name = req.body.name;
+  const price = req.body.price;
+
+  try {
+    await stripe.products.create(
+      { name: name, type: "good", attributes: ["name"] },
+      (err, res) => {
+        const prodId = res.id;
+        sizes.forEach((s) => {
+          stripe.skus.create({
+            attributes: {
+              name: s,
+            },
+            product: prodId,
+            price: price,
+            currency: "usd",
+            inventory: {
+              type: "infinite",
+            },
+          });
+        });
+      }
+    );
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 module.exports = router;
